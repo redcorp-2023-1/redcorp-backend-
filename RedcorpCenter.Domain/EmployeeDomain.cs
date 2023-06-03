@@ -1,0 +1,49 @@
+﻿using RedcorpCenter.Infraestructure.Models;
+using RedcorpCenter.Infraestructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RedcorpCenter.Domain
+{
+    public class EmployeeDomain :IEmployeeDomain
+    {
+        public IEmployeeInfraestructure _employeeInfraestructure;
+
+        public EmployeeDomain(IEmployeeInfraestructure employeeInfraestructure)
+        {
+            _employeeInfraestructure = employeeInfraestructure;
+        }
+
+
+
+        public async Task<bool> SaveAsync(Employee employee)
+        {
+            if (!this.IsValidData(employee.Name)) throw new Exception("The length of your name is invalid(>3)");
+            if (employee.Name.Length > 20) throw new Exception("the name is more than 20");
+
+            return await _employeeInfraestructure.SaveAsync(employee);
+        }
+
+        public bool update(int id, string name)
+        {
+            if (!this.IsValidData(name)) throw new Exception("The length of your name is invalid");
+            return _employeeInfraestructure.update(id, name);
+        }
+
+        public bool delete(int id)
+        {
+            return _employeeInfraestructure.delete(id);
+        }
+
+
+        private bool IsValidData(string name)
+        {
+            if (name.Length < 3) return false;
+            return true;
+
+        }
+    }
+}
