@@ -1,0 +1,6 @@
+C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.API\obj\Debug\net7.0\RedcorpCenter.API.csproj.AssemblyReference.cache
+C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.API\obj\Debug\net7.0\RedcorpCenter.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.API\obj\Debug\net7.0\RedcorpCenter.API.AssemblyInfoInputs.cache
+C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.API\obj\Debug\net7.0\RedcorpCenter.API.AssemblyInfo.cs
+C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.API\obj\Debug\net7.0\RedcorpCenter.API.csproj.CoreCompileInputs.cache
+C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.API\obj\Debug\net7.0\RedcorpCenter.API.MvcApplicationPartsAssemblyInfo.cache
