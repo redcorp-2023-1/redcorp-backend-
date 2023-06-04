@@ -18,6 +18,8 @@ builder.Services.AddScoped<IEmployeeInfraestructure, EmployeeMySQLInfraestructur
 builder.Services.AddScoped<IEmployeeDomain, EmployeeDomain>();
 builder.Services.AddScoped<IProjectInfraestructure, ProjectMySQLInfraestructure>();
 builder.Services.AddScoped<IProjectDomain, ProjectDomain>();
+builder.Services.AddScoped<ITaskInfraestructure, TaskMySQLInfraestructure>();
+builder.Services.AddScoped<ITaskDomain, TaskDomain>();
 
 //Conexion a MYSQL
 var connectionString = builder.Configuration.GetConnectionString("redcorpCenterConnection");

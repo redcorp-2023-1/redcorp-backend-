@@ -26,7 +26,8 @@ namespace RedcorpCenter.API.Controllers
             return _projectInfraestructure.GetAll();
         }
         
-        [HttpGet("api/Project/{projectId}")]
+        [HttpGet("{projectId}")]
+        //[HttpGet("{id}", Name = "Get")]
         public ProjectResponse GetProjectById(int id)
         {
             Project project = _projectInfraestructure.GetById(id);
@@ -45,7 +46,7 @@ namespace RedcorpCenter.API.Controllers
         }
         
         [HttpPost]
-        public void Post([FromBody] ProjectRequest value)
+        public async void Post([FromBody] ProjectRequest value)
         {
             Project project = new Project()
             {
@@ -55,7 +56,7 @@ namespace RedcorpCenter.API.Controllers
                 State = value.State,
             };
             
-            _projectInfraestructure.SaveAsync(project);
+            await _projectDomain.SaveAsync(project);
         }
         
         [HttpPut("{id}")]
@@ -76,8 +77,6 @@ namespace RedcorpCenter.API.Controllers
             {
                 StatusCode(400);
             }
-            
-
         }
 
         [HttpDelete("{id}")]
