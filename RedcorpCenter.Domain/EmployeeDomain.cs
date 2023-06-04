@@ -43,7 +43,6 @@ namespace RedcorpCenter.Domain
         {
             if (name.Length < 3) return false;
             return true;
-
         }
     }
 }

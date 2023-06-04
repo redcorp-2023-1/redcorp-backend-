@@ -21,10 +21,7 @@ namespace RedcorpCenter.Infraestructure
 
         public async Task<List<Employee>> GetAllAsync()
         {
-
-
             return await _redcorpCenterDBContext.Employees.Where(employee => employee.IsActive).ToListAsync();
-
         }
 
         public async Task<bool> SaveAsync(Employee employee)
@@ -32,10 +29,7 @@ namespace RedcorpCenter.Infraestructure
 
             try
             {
-
-
                 _redcorpCenterDBContext.Employees.Add(employee);
-
                 await _redcorpCenterDBContext.SaveChangesAsync();
             }
 
