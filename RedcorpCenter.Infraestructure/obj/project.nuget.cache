@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R4slSANkvDKcH3iYdg9rg7NMByq33qC7O0fa3Y0+USn2E3iD0ieqv6nhIx4edJwF6yMJForf5/EeS4W54Ua2lw==",
+  "dgSpecHash": "qktOFBl88fK/Z1/vgp8vCFK/5QF4KAFqG0DkJOgaWX+P+ofIl3OIxWwSlX4QyqZS4zJLi1423ne8B9wYpKuLtQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj",
+  "projectFilePath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MICROSOFT\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.5\\microsoft.entityframeworkcore.7.0.5.nupkg.sha512",
     "C:\\Users\\MICROSOFT\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.5\\microsoft.entityframeworkcore.abstractions.7.0.5.nupkg.sha512",

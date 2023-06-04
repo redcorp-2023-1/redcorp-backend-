@@ -10,3 +10,15 @@ C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCent
 C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.Infraestructure\obj\Debug\net7.0\refint\RedcorpCenter.Infraestructure.dll
 C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.pdb
 C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.Infraestructure\obj\Debug\net7.0\ref\RedcorpCenter.Infraestructure.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\bin\Debug\net7.0\RedcorpCenter.Infraestructure.deps.json
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\bin\Debug\net7.0\RedcorpCenter.Infraestructure.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\bin\Debug\net7.0\RedcorpCenter.Infraestructure.pdb
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.csproj.AssemblyReference.cache
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.AssemblyInfoInputs.cache
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.AssemblyInfo.cs
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.csproj.CoreCompileInputs.cache
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\refint\RedcorpCenter.Infraestructure.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.pdb
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\ref\RedcorpCenter.Infraestructure.dll

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6JRT8C7h1R6B7mKNvjChk6i7wwd6ZDc24rdFCCN3Wmn1z2t39IeCUi28+87lwzzXbPdJA2HskmdmVOLkM31sig==",
+  "dgSpecHash": "Cy9wzbEATS5rYNz8rVJTTBLKVEM4qlwsoK3VyWQYKutHiuNDXL5zZzDx54J0ZfRpwgIm28zj/8UcrKdpdoQLqA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.API\\RedcorpCenter.API.csproj",
+  "projectFilePath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.API\\RedcorpCenter.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MICROSOFT\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\MICROSOFT\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

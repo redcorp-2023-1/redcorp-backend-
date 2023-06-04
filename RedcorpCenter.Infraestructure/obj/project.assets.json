@@ -676,11 +676,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj",
+      "projectUniqueName": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj",
       "projectName": "RedcorpCenter.Infraestructure",
-      "projectPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj",
+      "projectPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj",
       "packagesPath": "C:\\Users\\MICROSOFT\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\obj\\",
+      "outputPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

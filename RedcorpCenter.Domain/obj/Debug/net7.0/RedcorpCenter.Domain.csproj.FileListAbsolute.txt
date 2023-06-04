@@ -13,3 +13,18 @@ C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCent
 C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.Domain\obj\Debug\net7.0\refint\RedcorpCenter.Domain.dll
 C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.pdb
 C:\Users\MICROSOFT\Documents\V CICLO\Aplicacionesweb\redcorp-backend\RedcorpCenter.Domain\obj\Debug\net7.0\ref\RedcorpCenter.Domain.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\bin\Debug\net7.0\RedcorpCenter.Domain.deps.json
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\bin\Debug\net7.0\RedcorpCenter.Domain.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\bin\Debug\net7.0\RedcorpCenter.Domain.pdb
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\bin\Debug\net7.0\RedcorpCenter.Infraestructure.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\bin\Debug\net7.0\RedcorpCenter.Infraestructure.pdb
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.csproj.AssemblyReference.cache
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.AssemblyInfoInputs.cache
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.AssemblyInfo.cs
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.csproj.CoreCompileInputs.cache
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.csproj.CopyComplete
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\refint\RedcorpCenter.Domain.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.pdb
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\ref\RedcorpCenter.Domain.dll

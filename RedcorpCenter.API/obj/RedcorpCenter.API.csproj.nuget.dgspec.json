@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.API\\RedcorpCenter.API.csproj": {}
+    "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.API\\RedcorpCenter.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.API\\RedcorpCenter.API.csproj": {
+    "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.API\\RedcorpCenter.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.API\\RedcorpCenter.API.csproj",
+        "projectUniqueName": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.API\\RedcorpCenter.API.csproj",
         "projectName": "RedcorpCenter.API",
-        "projectPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.API\\RedcorpCenter.API.csproj",
+        "projectPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.API\\RedcorpCenter.API.csproj",
         "packagesPath": "C:\\Users\\MICROSOFT\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.API\\obj\\",
+        "outputPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Domain\\RedcorpCenter.Domain.csproj": {
-                "projectPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Domain\\RedcorpCenter.Domain.csproj"
+              "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Domain\\RedcorpCenter.Domain.csproj": {
+                "projectPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Domain\\RedcorpCenter.Domain.csproj"
               },
-              "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj": {
-                "projectPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj"
+              "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj": {
+                "projectPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj"
               }
             }
           }
@@ -124,14 +124,14 @@
         }
       }
     },
-    "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Domain\\RedcorpCenter.Domain.csproj": {
+    "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Domain\\RedcorpCenter.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Domain\\RedcorpCenter.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Domain\\RedcorpCenter.Domain.csproj",
         "projectName": "RedcorpCenter.Domain",
-        "projectPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Domain\\RedcorpCenter.Domain.csproj",
+        "projectPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Domain\\RedcorpCenter.Domain.csproj",
         "packagesPath": "C:\\Users\\MICROSOFT\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Domain\\obj\\",
+        "outputPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -153,8 +153,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj": {
-                "projectPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj"
+              "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj": {
+                "projectPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj"
               }
             }
           }
@@ -188,14 +188,14 @@
         }
       }
     },
-    "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj": {
+    "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj",
+        "projectUniqueName": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj",
         "projectName": "RedcorpCenter.Infraestructure",
-        "projectPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj",
+        "projectPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj",
         "packagesPath": "C:\\Users\\MICROSOFT\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MICROSOFT\\Documents\\V CICLO\\Aplicacionesweb\\redcorp-backend\\RedcorpCenter.Infraestructure\\obj\\",
+        "outputPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
