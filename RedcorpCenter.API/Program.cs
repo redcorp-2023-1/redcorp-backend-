@@ -16,6 +16,8 @@ builder.Services.AddSwaggerGen();
 //dependecy inyection
 builder.Services.AddScoped<IEmployeeInfraestructure, EmployeeMySQLInfraestructure>();
 builder.Services.AddScoped<IEmployeeDomain, EmployeeDomain>();
+builder.Services.AddScoped<IProjectInfraestructure, ProjectMySQLInfraestructure>();
+builder.Services.AddScoped<IProjectDomain, ProjectDomain>();
 
 //Conexion a MYSQL
 var connectionString = builder.Configuration.GetConnectionString("redcorpCenterConnection");

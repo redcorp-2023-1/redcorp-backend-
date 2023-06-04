@@ -28,3 +28,18 @@ C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\De
 C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\refint\RedcorpCenter.Domain.dll
 C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.pdb
 C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\ref\RedcorpCenter.Domain.dll
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\bin\Debug\net7.0\RedcorpCenter.Domain.deps.json
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\bin\Debug\net7.0\RedcorpCenter.Domain.dll
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\bin\Debug\net7.0\RedcorpCenter.Domain.pdb
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\bin\Debug\net7.0\RedcorpCenter.Infraestructure.dll
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\bin\Debug\net7.0\RedcorpCenter.Infraestructure.pdb
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.csproj.AssemblyReference.cache
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.AssemblyInfoInputs.cache
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.AssemblyInfo.cs
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.csproj.CopyComplete
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.dll
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\refint\RedcorpCenter.Domain.dll
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\RedcorpCenter.Domain.pdb
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Domain\obj\Debug\net7.0\ref\RedcorpCenter.Domain.dll

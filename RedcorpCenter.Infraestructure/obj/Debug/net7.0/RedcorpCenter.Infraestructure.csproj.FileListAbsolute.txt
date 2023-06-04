@@ -22,3 +22,15 @@ C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructu
 C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\refint\RedcorpCenter.Infraestructure.dll
 C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.pdb
 C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\ref\RedcorpCenter.Infraestructure.dll
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\bin\Debug\net7.0\RedcorpCenter.Infraestructure.deps.json
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\bin\Debug\net7.0\RedcorpCenter.Infraestructure.dll
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\bin\Debug\net7.0\RedcorpCenter.Infraestructure.pdb
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.csproj.AssemblyReference.cache
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.AssemblyInfoInputs.cache
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.AssemblyInfo.cs
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.csproj.CoreCompileInputs.cache
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.dll
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\refint\RedcorpCenter.Infraestructure.dll
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\RedcorpCenter.Infraestructure.pdb
+C:\Users\Esteban\Desktop\Aplicaciones Web\Codigo\Backend\BackEnd TB3\redcorp-backend-\RedcorpCenter.Infraestructure\obj\Debug\net7.0\ref\RedcorpCenter.Infraestructure.dll

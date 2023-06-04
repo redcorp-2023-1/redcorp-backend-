@@ -18,6 +18,7 @@ namespace RedcorpCenter.Infraestructure.Context
         public RedcorpCenterDBContext(DbContextOptions<RedcorpCenterDBContext> options) : base(options) { }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Section> Sections { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,6 +42,13 @@ namespace RedcorpCenter.Infraestructure.Context
             modelBuilder.Entity<Employee>().HasKey(p => p.Id);
             modelBuilder.Entity<Employee>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Employee>().Property(p => p.IsActive).HasDefaultValue(true);
+            
+            modelBuilder.Entity<Project>().ToTable("Projects");
+            modelBuilder.Entity<Project>().HasKey(p => p.Id);
+            modelBuilder.Entity<Project>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<Project>().Property(p => p.Description).IsRequired().HasMaxLength(70);
+            modelBuilder.Entity<Project>().Property(p => p.IsActive).HasDefaultValue(true);
+            modelBuilder.Entity<Project>().Property(p => p.InitialDate).HasDefaultValue(DateTime.Now);
         }
     }
 }
