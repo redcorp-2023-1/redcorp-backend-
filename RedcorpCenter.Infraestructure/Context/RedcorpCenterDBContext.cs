@@ -21,7 +21,7 @@ namespace RedcorpCenter.Infraestructure.Context
         public DbSet<Section> Sections { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Task> Tasks { get; set; }
-
+        public DbSet<SectionAndEmployee> SectionsAndEmployees { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -39,6 +39,7 @@ namespace RedcorpCenter.Infraestructure.Context
             modelBuilder.Entity<Section>().HasKey(p => p.Id);
             modelBuilder.Entity<Section>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Section>().Property(p => p.Description).IsRequired().HasMaxLength(70);
+            modelBuilder.Entity<Section>().Property(p => p.IsActive).HasDefaultValue(true);
 
             modelBuilder.Entity<Employee>().ToTable("Employees");
             modelBuilder.Entity<Employee>().HasKey(p => p.Id);
@@ -59,6 +60,13 @@ namespace RedcorpCenter.Infraestructure.Context
             modelBuilder.Entity<Task>().Property(p => p.IsActive).HasDefaultValue(true);
             modelBuilder.Entity<Task>().Property(p => p.IsCompleted).HasDefaultValue(false);
             modelBuilder.Entity<Task>().Property(p => p.InitialDate).HasDefaultValue(DateTime.Now);
+
+            modelBuilder.Entity<SectionAndEmployee>().ToTable("SectionsAndEmployees");
+            modelBuilder.Entity<SectionAndEmployee>().HasKey(p => p.Id);
+            modelBuilder.Entity<SectionAndEmployee>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<SectionAndEmployee>().Property(p => p.Section_Id).IsRequired();
+            modelBuilder.Entity<SectionAndEmployee>().Property(p => p.Employees_Id).IsRequired();
+            modelBuilder.Entity<SectionAndEmployee>().Property(p => p.IsActive).HasDefaultValue(true);
         }
     }
 }

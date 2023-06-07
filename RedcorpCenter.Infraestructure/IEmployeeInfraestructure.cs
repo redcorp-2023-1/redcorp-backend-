@@ -10,8 +10,8 @@ namespace RedcorpCenter.Infraestructure
     public interface IEmployeeInfraestructure
     {
         Employee GetById(int id);
-        public Task<bool> SaveAsync(Employee employee);
-        public bool update(int id, string name);
+        public bool Save(Employee employee);
+        public bool update(int id, string name, string last_name, string email);
         public bool delete(int id);
         Task<List<Employee>> GetAllAsync();
     }
