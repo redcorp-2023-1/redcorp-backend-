@@ -21,6 +21,7 @@ namespace RedcorpCenter.Infraestructure.Context
         public DbSet<Section> Sections { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<Team> Teams { get; set; }
         public DbSet<SectionAndEmployee> SectionsAndEmployees { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,6 +61,12 @@ namespace RedcorpCenter.Infraestructure.Context
             modelBuilder.Entity<Task>().Property(p => p.IsActive).HasDefaultValue(true);
             modelBuilder.Entity<Task>().Property(p => p.IsCompleted).HasDefaultValue(false);
             modelBuilder.Entity<Task>().Property(p => p.InitialDate).HasDefaultValue(DateTime.Now);
+            
+            modelBuilder.Entity<Team>().ToTable("Teams");
+            modelBuilder.Entity<Team>().HasKey(p => p.Id);
+            modelBuilder.Entity<Team>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<Team>().Property(p => p.Description).IsRequired().HasMaxLength(70);
+            modelBuilder.Entity<Team>().Property(p => p.IsActive).HasDefaultValue(true);
 
             modelBuilder.Entity<SectionAndEmployee>().ToTable("SectionsAndEmployees");
             modelBuilder.Entity<SectionAndEmployee>().HasKey(p => p.Id);

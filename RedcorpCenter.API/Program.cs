@@ -3,6 +3,7 @@ using RedcorpCenter.API.Mapper;
 using RedcorpCenter.Domain;
 using RedcorpCenter.Infraestructure;
 using RedcorpCenter.Infraestructure.Context;
+using RedcorpCenter.Infraestructure.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,9 @@ builder.Services.AddScoped<IProjectDomain, ProjectDomain>();
 
 builder.Services.AddScoped<ITaskInfraestructure, TaskMySQLInfraestructure>();
 builder.Services.AddScoped<ITaskDomain, TaskDomain>();
+
+builder.Services.AddScoped<ITeamInfraestructure, TeamMySQLInfraestructure>();
+builder.Services.AddScoped<ITeamDomain, TeamDomain>();
 
 builder.Services.AddScoped<ISectionInfraestructure, SectionMySQLInfraestructure>();
 builder.Services.AddScoped<ISectionDomain, SectionDomain>();
