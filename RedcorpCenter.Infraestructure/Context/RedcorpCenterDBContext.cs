@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Task = RedcorpCenter.Infraestructure.Models.Task;
 
 namespace RedcorpCenter.Infraestructure.Context
 {
@@ -19,6 +20,7 @@ namespace RedcorpCenter.Infraestructure.Context
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Task> Tasks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -49,6 +51,14 @@ namespace RedcorpCenter.Infraestructure.Context
             modelBuilder.Entity<Project>().Property(p => p.Description).IsRequired().HasMaxLength(70);
             modelBuilder.Entity<Project>().Property(p => p.IsActive).HasDefaultValue(true);
             modelBuilder.Entity<Project>().Property(p => p.InitialDate).HasDefaultValue(DateTime.Now);
+            
+            modelBuilder.Entity<Task>().ToTable("Tasks");
+            modelBuilder.Entity<Task>().HasKey(p => p.Id);
+            modelBuilder.Entity<Task>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<Task>().Property(p => p.Description).IsRequired().HasMaxLength(70);
+            modelBuilder.Entity<Task>().Property(p => p.IsActive).HasDefaultValue(true);
+            modelBuilder.Entity<Task>().Property(p => p.IsCompleted).HasDefaultValue(false);
+            modelBuilder.Entity<Task>().Property(p => p.InitialDate).HasDefaultValue(DateTime.Now);
         }
     }
 }
