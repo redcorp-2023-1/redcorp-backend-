@@ -56,8 +56,8 @@ namespace RedcorpCenter.API.Controllers
 
         // POST: api/Tutorial
         [HttpPost]
-        public async void PostAsync([FromBody] EmployeeRequest value)
-        {
+        public void Post([FromBody] EmployeeRequest employeeRequest)
+        {   
             if (ModelState.IsValid)
             {
                 //Employee employee = new Employee()
@@ -65,9 +65,9 @@ namespace RedcorpCenter.API.Controllers
                 //    Name = value.Name
                 //};
 
-                var employee = _mapper.Map<EmployeeRequest, Employee>(value);
+                var employee = _mapper.Map<EmployeeRequest, Employee>(employeeRequest);
 
-                await _employeeDomain.SaveAsync(employee);
+                _employeeDomain.Save(employee);
             }
             else
             {
@@ -77,9 +77,9 @@ namespace RedcorpCenter.API.Controllers
 
         // PUT: api/Tutorial/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] string name,string last_name, string email)
         {
-            _employeeDomain.update(id, value);
+            _employeeDomain.update(id, name, last_name,email);
         }
 
         // DELETE: api/Tutorial/5

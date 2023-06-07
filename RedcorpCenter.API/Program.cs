@@ -16,6 +16,14 @@ builder.Services.AddSwaggerGen();
 //dependecy inyection
 builder.Services.AddScoped<IEmployeeInfraestructure, EmployeeMySQLInfraestructure>();
 builder.Services.AddScoped<IEmployeeDomain, EmployeeDomain>();
+builder.Services.AddAutoMapper(typeof(ModelToResponse), typeof(RequestToModel));
+
+builder.Services.AddScoped<ISectionInfraestructure,SectionMySQLInfraestructure>();
+builder.Services.AddScoped<ISectionDomain, SectionDomain>();
+builder.Services.AddAutoMapper(typeof(ModelToResponseSection), typeof(RequestToModelSection));
+
+builder.Services.AddScoped<ISectionAndEmployeeInfraestructure, SectionAndEmployeeMySQLInfraestructure>();
+builder.Services.AddScoped<ISectionAndEmployeeDomain, SectionAndEmployeeDomain>();
 
 //Conexion a MYSQL
 var connectionString = builder.Configuration.GetConnectionString("redcorpCenterConnection");
@@ -33,7 +41,7 @@ builder.Services.AddDbContext<RedcorpCenterDBContext>(
         );
     });
 
-builder.Services.AddAutoMapper(typeof(ModelToResponse), typeof(RequestToModel));
+
 
 var app = builder.Build();
 

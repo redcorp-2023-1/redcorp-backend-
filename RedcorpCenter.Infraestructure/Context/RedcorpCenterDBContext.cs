@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿    using Microsoft.EntityFrameworkCore;
 using RedcorpCenter.Infraestructure.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +18,7 @@ namespace RedcorpCenter.Infraestructure.Context
         public RedcorpCenterDBContext(DbContextOptions<RedcorpCenterDBContext> options) : base(options) { }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Section> Sections { get; set; }
+        public DbSet<SectionsAndEmployees> SectionsAndEmployees { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,11 +37,20 @@ namespace RedcorpCenter.Infraestructure.Context
             modelBuilder.Entity<Section>().HasKey(p => p.Id);
             modelBuilder.Entity<Section>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Section>().Property(p => p.Description).IsRequired().HasMaxLength(70);
+            modelBuilder.Entity<Section>().Property(p => p.IsActive).HasDefaultValue(true);
 
             modelBuilder.Entity<Employee>().ToTable("Employees");
             modelBuilder.Entity<Employee>().HasKey(p => p.Id);
             modelBuilder.Entity<Employee>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Employee>().Property(p => p.IsActive).HasDefaultValue(true);
+
+            modelBuilder.Entity<SectionsAndEmployees>().ToTable("SectionsAndEmployees");
+            modelBuilder.Entity<SectionsAndEmployees>().HasKey(p => p.Id);
+            modelBuilder.Entity<SectionsAndEmployees>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<SectionsAndEmployees>().Property(p => p.Section_Id).IsRequired();
+            modelBuilder.Entity<SectionsAndEmployees>().Property(p => p.Employees_Id).IsRequired();
+
         }
+        
     }
 }

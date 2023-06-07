@@ -23,16 +23,16 @@ namespace RedcorpCenter.Domain.Test
 
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
-            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
+            _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
             EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
 
 
             //Act
-            var result = employeeDomain.SaveAsync(employee);
+            var result = employeeDomain.Save(employee);
 
 
             //Test
-            Assert.True(result.Result);
+            Assert.True(result);
 
         }
 
@@ -45,12 +45,12 @@ namespace RedcorpCenter.Domain.Test
             };
 
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
-            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
+            _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
             EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
 
-            var ex = Assert.ThrowsAsync<Exception>(() => employeeDomain.SaveAsync(employee));
+            var ex = Assert.Throws<Exception>(() => employeeDomain.Save(employee));
 
-            Assert.Equal("The length of your name is invalid(>3)", ex.Result.Message);
+            Assert.Equal("The length of your name is invalid(>3)", ex.Message);
         }
 
         [Fact]
@@ -64,15 +64,15 @@ namespace RedcorpCenter.Domain.Test
 
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
-            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
+            _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
 
             EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
 
             //Act
-            var ex = Assert.ThrowsAsync<Exception>(() => employeeDomain.SaveAsync(employee));
+            var ex = Assert.Throws<Exception>(() => employeeDomain.Save(employee));
 
             //Assert
-            Assert.Equal("the name is more than 20", ex.Result.Message);
+            Assert.Equal("the name is more than 20", ex.Message);
         }
 
         [Fact]

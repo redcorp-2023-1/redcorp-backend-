@@ -9,8 +9,8 @@ namespace RedcorpCenter.Domain
 {
     public interface IEmployeeDomain
     {
-        public Task<bool> SaveAsync(Employee employee);
-        public bool update(int id, string name);
+        public bool Save(Employee employee);
+        public bool update(int id, string name,string last_name,string email);
         public bool delete(int id);
     }
 }
