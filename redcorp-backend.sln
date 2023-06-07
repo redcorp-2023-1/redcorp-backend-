@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedcorpCenter.Domain", "Red
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedcorpCenter.Infraestructure", "RedcorpCenter.Infraestructure\RedcorpCenter.Infraestructure.csproj", "{7D773A8E-6AC3-4D0F-BF16-235ACFC1CB52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedcorpCenter.Domain.Test", "RedcorpCenter.Domain.Test\RedcorpCenter.Domain.Test.csproj", "{E291B175-E783-4E80-B85A-B739DB4D7CA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedcorpCenter.Domain.Test", "RedcorpCenter.Domain.Test\RedcorpCenter.Domain.Test.csproj", "{E291B175-E783-4E80-B85A-B739DB4D7CA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3962A011-3BAB-47B7-955D-728B77CBD853}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
