@@ -24,13 +24,13 @@ namespace RedcorpCenter.Infraestructure
             return await _redcorpCenterDBContext.Employees.Where(employee => employee.IsActive).ToListAsync();
         }
 
-        public async Task<bool> SaveAsync(Employee employee)
+        public bool Save(Employee employee)
         {
 
             try
             {
                 _redcorpCenterDBContext.Employees.Add(employee);
-                await _redcorpCenterDBContext.SaveChangesAsync();
+                _redcorpCenterDBContext.SaveChangesAsync();
             }
 
 
@@ -41,10 +41,12 @@ namespace RedcorpCenter.Infraestructure
             return true;
         }
 
-        public bool update(int id, string name)
+        public bool update(int id, string name, string last_name, string email)
         {
             Employee _employee = _redcorpCenterDBContext.Employees.Find(id);
             _employee.Name = name;
+            _employee.last_name = last_name;
+            _employee.email = email;
 
             _redcorpCenterDBContext.Employees.Update(_employee);
 
@@ -60,8 +62,6 @@ namespace RedcorpCenter.Infraestructure
             employee.IsActive = false;
 
             _redcorpCenterDBContext.Employees.Update(employee);
-
-            //_learningCenterDbContext.Tutorials.Remove(tutorial); Eliminacion física
 
             _redcorpCenterDBContext.SaveChanges();
 

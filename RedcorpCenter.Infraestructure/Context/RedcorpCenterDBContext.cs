@@ -39,6 +39,7 @@ namespace RedcorpCenter.Infraestructure.Context
             modelBuilder.Entity<Section>().HasKey(p => p.Id);
             modelBuilder.Entity<Section>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Section>().Property(p => p.Description).IsRequired().HasMaxLength(70);
+            modelBuilder.Entity<Section>().Property(p => p.IsActive).HasDefaultValue(true);
 
             modelBuilder.Entity<Employee>().ToTable("Employees");
             modelBuilder.Entity<Employee>().HasKey(p => p.Id);
