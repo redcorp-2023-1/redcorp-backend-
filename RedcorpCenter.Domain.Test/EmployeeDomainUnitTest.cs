@@ -18,21 +18,22 @@ namespace RedcorpCenter.Domain.Test
             //Arrange
             Employee employee = new Employee()
             {
-                Name = "employee"
+                Name = "employee",
+                last_name = "empleado"
             };
 
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
-            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
+            _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
             EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
 
 
             //Act
-            var result = employeeDomain.SaveAsync(employee);
+            var result = employeeDomain.Save(employee);
 
 
             //Test
-            Assert.True(result.Result);
+            Assert.True(result);
 
         }
 
@@ -41,16 +42,17 @@ namespace RedcorpCenter.Domain.Test
         {
             Employee employee = new Employee()
             {
-                Name = "An"
+                Name = "An",
+                last_name = "wa"
             };
 
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
-            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
+            _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
             EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
 
-            var ex = Assert.ThrowsAsync<Exception>(() => employeeDomain.SaveAsync(employee));
+            var ex = Assert.Throws<Exception>(() => employeeDomain.Save(employee));
 
-            Assert.Equal("The length of your name is invalid(>3)", ex.Result.Message);
+            Assert.Equal("The length of your name is invalid(>3)", ex.Message);
         }
 
         [Fact]
@@ -59,20 +61,21 @@ namespace RedcorpCenter.Domain.Test
             //Arrange
             Employee employee = new Employee()
             {
-                Name = "Employee is very very largest"
+                Name = "Employee is very very largest",
+                last_name = "Employee lastname is very very largest"
             };
 
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
-            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
+            _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
 
             EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
 
             //Act
-            var ex = Assert.ThrowsAsync<Exception>(() => employeeDomain.SaveAsync(employee));
+            var ex = Assert.Throws<Exception>(() => employeeDomain.Save(employee));
 
             //Assert
-            Assert.Equal("the name is more than 20", ex.Result.Message);
+            Assert.Equal("the name is more than 20", ex.Message);
         }
 
         [Fact]
@@ -82,15 +85,19 @@ namespace RedcorpCenter.Domain.Test
             Employee employee = new Employee()
             {
                 Id = 1,
-                Name = "Ermelindo"
+                Name = "Ermelindo",
+                last_name = "Caceres",
+                email = "121232@upc.edu.pe",
+                area = "Finanzas",
+                cargo = "Jefe de proyectos"
             };
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
-            _employeeInfraestructure.Setup(t => t.update(employee.Id, employee.Name)).Returns(true);
+            _employeeInfraestructure.Setup(t => t.update(employee.Id, employee.Name,employee.last_name,employee.email,employee.area,employee.cargo)).Returns(true);
 
             //Act
             EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
-            var result = employeeDomain.update(employee.Id, employee.Name);
+            var result = employeeDomain.update(employee.Id, employee.Name, employee.last_name, employee.email, employee.area, employee.cargo);
 
             //Assert
             Assert.True(result);

@@ -10,7 +10,7 @@ namespace RedcorpCenter.Domain
     public interface IEmployeeDomain
     {
         public bool Save(Employee employee);
-        public bool update(int id, string name, string last_name, string email);
+        public bool update(int id, string name, string last_name, string email, string area, string cargo);
         public bool delete(int id);
     }
 }

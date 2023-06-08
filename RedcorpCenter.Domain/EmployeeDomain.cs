@@ -21,16 +21,16 @@ namespace RedcorpCenter.Domain
 
         public bool Save(Employee employee)
         {
-            if (!this.IsValidData(employee.Name)) throw new Exception("The length of your name is invalid(>3)");
+            if (!this.IsValidData(employee.Name, employee.last_name)) throw new Exception("The length of your name is invalid(>3)");
             if (employee.Name.Length > 20) throw new Exception("the name is more than 20");
 
             return _employeeInfraestructure.Save(employee);
         }
 
-        public bool update(int id, string name, string last_name, string email)
+        public bool update(int id, string name, string last_name, string email, string area, string cargo)
         {
-            if (!this.IsValidData(name)) throw new Exception("The length of your name is invalid");
-            return _employeeInfraestructure.update(id, name, last_name, email);
+            if (!this.IsValidData(name,last_name)) throw new Exception("The length of your name is invalid");
+            return _employeeInfraestructure.update(id, name, last_name, email, area, cargo);
         }
 
         public bool delete(int id)
@@ -39,9 +39,9 @@ namespace RedcorpCenter.Domain
         }
 
 
-        private bool IsValidData(string name)
+        private bool IsValidData(string name, string last_name)
         {
-            if (name.Length < 3) return false;
+            if (name.Length < 3 || last_name.Length <3) return false;
             return true;
         }
     }

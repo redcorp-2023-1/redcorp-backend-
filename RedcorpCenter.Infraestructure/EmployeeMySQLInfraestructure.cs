@@ -30,7 +30,7 @@ namespace RedcorpCenter.Infraestructure
             try
             {
                 _redcorpCenterDBContext.Employees.Add(employee);
-                _redcorpCenterDBContext.SaveChangesAsync();
+                _redcorpCenterDBContext.SaveChanges();
             }
 
 
@@ -41,7 +41,7 @@ namespace RedcorpCenter.Infraestructure
             return true;
         }
 
-        public bool update(int id, string name, string last_name, string email)
+        public bool update(int id, string name, string last_name, string email, string area, string cargo)
         {
             Employee _employee = _redcorpCenterDBContext.Employees.Find(id);
             _employee.Name = name;
@@ -71,6 +71,13 @@ namespace RedcorpCenter.Infraestructure
         public Employee GetById(int id)
         {
             return _redcorpCenterDBContext.Employees.Find(id);
+        }
+
+        public Employee GetByLogin(string email, string password)
+        {
+            Employee employee = _redcorpCenterDBContext.Employees.Where(x => x.email == email && x.password == password).FirstOrDefault();
+
+            return employee;
         }
     }
 }
