@@ -52,7 +52,7 @@ namespace RedcorpCenter.Domain.Test
 
             var ex = Assert.Throws<Exception>(() => employeeDomain.Save(employee));
 
-            Assert.Equal("The length of your name is invalid(>3)", ex.Message);
+            Assert.Equal("The length of your name and lastname is invalid(>3)", ex.Message);
         }
 
         [Fact]

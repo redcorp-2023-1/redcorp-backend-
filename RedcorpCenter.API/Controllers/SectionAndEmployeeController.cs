@@ -38,6 +38,19 @@ namespace RedcorpCenter.API.Controllers
             return sectionsAndEmployees;
         }
 
+        [HttpGet("GetEmployees/{sectionid}", Name = "GetEmployees")]
+        public List<Employee> GetEmployeesBySectionId(int sectionid)
+        {
+            return _sectionAndEmployeeInfraestructure.GetEmployeesBySectionId(sectionid);
+        }
+
+        [HttpGet("GetSections/{employeeid}", Name = "GetSections")]
+        public List<Section> GetSectionsByEmployeeId(int employeeid)
+        {
+            return _sectionAndEmployeeInfraestructure.GetSectionsByEmployeeId(employeeid);
+        }
+
+
         // POST api/<SectionAndEmployeeController>
         [HttpPost]
         public void Post([FromBody] SectionAndEmployeeRequest sectionsAndEmployeesRequest)
@@ -61,9 +74,10 @@ namespace RedcorpCenter.API.Controllers
 
         // PUT api/<SectionAndEmployeeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] int Section_Id, int Employee_Id)
+        public void Put(int id, [FromBody] SectionAndEmployeeRequest sectionAndEmployeeRequest)
         {
-            _sectionAndEmployeeDomain.update(id, Section_Id, Employee_Id);
+
+            _sectionAndEmployeeDomain.update(id,sectionAndEmployeeRequest.Section_Id, sectionAndEmployeeRequest.Employees_Id);
         }
 
         // DELETE api/<SectionAndEmployeeController>/5
@@ -72,5 +86,8 @@ namespace RedcorpCenter.API.Controllers
         {
             _sectionAndEmployeeDomain.delete(id);
         }
+
+
+
     }
 }

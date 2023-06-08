@@ -21,7 +21,7 @@ namespace RedcorpCenter.Domain
 
         public bool Save(Employee employee)
         {
-            if (!this.IsValidData(employee.Name, employee.last_name)) throw new Exception("The length of your name is invalid(>3)");
+            if (!this.IsValidData(employee.Name, employee.last_name)) throw new Exception("The length of your name and lastname is invalid(>3)");
             if (employee.Name.Length > 20) throw new Exception("the name is more than 20");
 
             return _employeeInfraestructure.Save(employee);

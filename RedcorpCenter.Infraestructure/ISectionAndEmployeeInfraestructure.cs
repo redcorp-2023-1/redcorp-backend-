@@ -14,6 +14,9 @@ namespace RedcorpCenter.Infraestructure
         public bool update(int id, int Section_Id, int Employee_Id);
         public bool delete(int id);
 
+        public bool existsSectionIdAndEmployeeId(SectionAndEmployee sectionAndEmployee);
+        public List<Employee> GetEmployeesBySectionId(int sectionId);
+        public List<Section> GetSectionsByEmployeeId(int employeeId);
         Task<List<SectionAndEmployee>> GetAllAsync();
 
     }
