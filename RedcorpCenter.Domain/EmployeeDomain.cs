@@ -1,16 +1,9 @@
-﻿using RedcorpCenter.Infraestructure.Models;
-using RedcorpCenter.Infraestructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection.Metadata;
-using System.Xml.Linq;
+﻿using RedcorpCenter.Infraestructure;
+using RedcorpCenter.Infraestructure.Models;
 
 namespace RedcorpCenter.Domain
 {
-    public class EmployeeDomain :IEmployeeDomain
+    public class EmployeeDomain : IEmployeeDomain
     {
         public IEmployeeInfraestructure _employeeInfraestructure;
         private IEncryptDomain _encryptDomain;
@@ -32,7 +25,7 @@ namespace RedcorpCenter.Domain
 
         public bool update(int id, string name, string last_name, string email, string area, string cargo)
         {
-            if (!this.IsValidData(name,last_name)) throw new Exception("The length of your name is invalid");
+            if (!this.IsValidData(name, last_name)) throw new Exception("The length of your name is invalid");
             return _employeeInfraestructure.update(id, name, last_name, email, area, cargo);
         }
 
@@ -44,7 +37,7 @@ namespace RedcorpCenter.Domain
 
         private bool IsValidData(string name, string last_name)
         {
-            if (name.Length < 3 || last_name.Length <3) return false;
+            if (name.Length < 3 || last_name.Length < 3) return false;
             return true;
         }
 
@@ -57,7 +50,7 @@ namespace RedcorpCenter.Domain
                 return 0;
             }
 
-            return _employeeInfraestructure.Signup(employee);   
+            return _employeeInfraestructure.Signup(employee);
         }
 
 

@@ -77,7 +77,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin", builder =>
-        builder.WithOrigins("http://localhost:5173")
+        builder.WithOrigins("https://redcord-webapp.web.app")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
