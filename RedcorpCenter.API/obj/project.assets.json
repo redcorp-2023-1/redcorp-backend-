@@ -3725,7 +3725,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "RedcorpCenter.Infraestructure": "1.0.0"
+          "RedcorpCenter.Infraestructure": "1.0.0",
+          "System.IdentityModel.Tokens.Jwt": "6.15.1"
         },
         "compile": {
           "bin/placeholder/RedcorpCenter.Domain.dll": {}

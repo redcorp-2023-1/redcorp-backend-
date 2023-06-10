@@ -38,7 +38,7 @@ builder.Services.AddAutoMapper(typeof(ModelToResponseSection), typeof(RequestToM
 builder.Services.AddScoped<ISectionAndEmployeeInfraestructure, SectionAndEmployeeMySQLInfraestructure>();
 builder.Services.AddScoped<ISectionAndEmployeeDomain, SectionAndEmployeeDomain>();
 
-
+builder.Services.AddScoped<IEncryptDomain, EncryptDomain>();
 
 //Conexion a MYSQL
 var connectionString = builder.Configuration.GetConnectionString("redcorpCenterConnection");
@@ -73,7 +73,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+//Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin", builder =>
+        builder.WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
+
 var app = builder.Build();
+
+app.UseCors("AllowOrigin");
 
 using (var scope = app.Services.CreateScope())
 using (var context = scope.ServiceProvider.GetService<RedcorpCenterDBContext>())

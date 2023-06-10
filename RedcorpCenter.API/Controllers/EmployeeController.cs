@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -104,7 +105,7 @@ namespace RedcorpCenter.API.Controllers
             string email = requestLogin.email;
             string password = requestLogin.password; 
 
-            Employee employee = _employeeInfraestructure.GetByLogin(email, password);
+            Employee employee = _employeeDomain.LogIn(email, password);
                
             if(employee == null)
             {
@@ -112,7 +113,8 @@ namespace RedcorpCenter.API.Controllers
                 {
                     access = false,
                     message = "Credenciales incorrectas",
-                    result = ""
+                    result = "",
+                    id_employee = 0
                 };
             }
 
@@ -139,12 +141,30 @@ namespace RedcorpCenter.API.Controllers
 
             return new
             {
-                access= true,
+                access = true,
                 message = "Operación exitosa",
-                result = new JwtSecurityTokenHandler().WriteToken(token)
+                result = new JwtSecurityTokenHandler().WriteToken(token),
+                employee_id= employee.Id
             };
 
 
+        }
+
+        [HttpPost]
+        [Route("Signup")]
+        public IActionResult Signup([FromBody] EmployeeRequest employeesignup)
+        {
+            var employee = _mapper.Map<EmployeeRequest,Employee>(employeesignup);
+            var id = _employeeDomain.Signup(employee);
+
+            if (id > 0)
+            {
+                return Ok(id.ToString());
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
 

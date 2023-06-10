@@ -79,5 +79,19 @@ namespace RedcorpCenter.Infraestructure
 
             return employee;
         }
+
+        public int Signup(Employee employee)
+        {
+            _redcorpCenterDBContext.Employees.Add(employee);
+            _redcorpCenterDBContext.SaveChanges();
+            return employee.Id;
+        }
+
+        public Employee GetByEmail(string email)
+        {
+            Employee employee = _redcorpCenterDBContext.Employees.SingleOrDefault(e => e.email == email);
+
+            return employee;
+        }
     }
 }

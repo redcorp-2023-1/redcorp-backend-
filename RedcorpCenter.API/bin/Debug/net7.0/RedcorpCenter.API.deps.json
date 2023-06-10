@@ -2295,7 +2295,8 @@
       "xunit.runner.visualstudio/2.4.5": {},
       "RedcorpCenter.Domain/1.0.0": {
         "dependencies": {
-          "RedcorpCenter.Infraestructure": "1.0.0"
+          "RedcorpCenter.Infraestructure": "1.0.0",
+          "System.IdentityModel.Tokens.Jwt": "6.15.1"
         },
         "runtime": {
           "RedcorpCenter.Domain.dll": {}

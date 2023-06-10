@@ -5,16 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection.Metadata;
+using System.Xml.Linq;
 
 namespace RedcorpCenter.Domain
 {
     public class EmployeeDomain :IEmployeeDomain
     {
         public IEmployeeInfraestructure _employeeInfraestructure;
-
-        public EmployeeDomain(IEmployeeInfraestructure employeeInfraestructure)
+        private IEncryptDomain _encryptDomain;
+        public EmployeeDomain(IEmployeeInfraestructure employeeInfraestructure, IEncryptDomain encryptDomain)
         {
             _employeeInfraestructure = employeeInfraestructure;
+            _encryptDomain = encryptDomain;
         }
 
 
@@ -43,6 +46,32 @@ namespace RedcorpCenter.Domain
         {
             if (name.Length < 3 || last_name.Length <3) return false;
             return true;
+        }
+
+        public int Signup(Employee employee)
+        {
+            employee.password = _encryptDomain.Encrypt(employee.password);
+
+            if (!this.IsValidData(employee.Name, employee.last_name))
+            {
+                return 0;
+            }
+
+            return _employeeInfraestructure.Signup(employee);   
+        }
+
+
+
+        public Employee LogIn(string email, string password)
+        {
+            var foundUser = _employeeInfraestructure.GetByEmail(email);
+
+            if (foundUser != null && _encryptDomain.Encrypt(password) == foundUser.password)
+            {
+                return foundUser;
+            }
+
+            return null;
         }
     }
 }

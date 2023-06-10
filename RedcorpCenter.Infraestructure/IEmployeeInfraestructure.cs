@@ -14,6 +14,8 @@ namespace RedcorpCenter.Infraestructure
         public bool update(int id, string name, string last_name, string email, string area, string cargo);
         public bool delete(int id);
 
+        public Employee GetByEmail (string email);
+        public int Signup  (Employee employee);
         Employee GetByLogin(string email, string password);
         Task<List<Employee>> GetAllAsync();
     }

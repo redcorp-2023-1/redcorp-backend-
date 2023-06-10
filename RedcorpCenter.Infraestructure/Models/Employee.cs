@@ -18,6 +18,7 @@ namespace RedcorpCenter.Infraestructure.Models
         public string area { get; set; }
         public string cargo { get; set; }   
 
+        public string photo { get; set; }
         public bool IsActive { get; set; }
 
 
