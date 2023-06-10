@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using static System.Collections.Specialized.BitVector32;
+using System.Net;
 
 namespace RedcorpCenter.Infraestructure
 {
@@ -32,8 +34,16 @@ namespace RedcorpCenter.Infraestructure
         {
             try
             {
-                _redcorpCenterDBContext.SectionsAndEmployees.Add(sectionAndEmployees);
-                _redcorpCenterDBContext.SaveChanges();
+                if(existsSectionIdAndEmployeeId(sectionAndEmployees))
+                {
+                    _redcorpCenterDBContext.SectionsAndEmployees.Add(sectionAndEmployees);
+                    _redcorpCenterDBContext.SaveChanges();
+                }
+                else
+                {
+                    return false;
+                }
+                
             }
             catch (Exception ex)
             {
@@ -60,6 +70,46 @@ namespace RedcorpCenter.Infraestructure
             _redcorpCenterDBContext.SectionsAndEmployees.Update(sectionsAndEmployees);
             _redcorpCenterDBContext.SaveChanges();
             return true;
+        }
+
+        public bool existsSectionIdAndEmployeeId(SectionAndEmployee sectionAndEmployee)
+        {
+            bool employeeExists = _redcorpCenterDBContext.Employees.Any(e => e.Id == sectionAndEmployee.Employees_Id);
+            bool sectionExists = _redcorpCenterDBContext.Sections.Any(s => s.Id == sectionAndEmployee.Section_Id);
+
+            return employeeExists && sectionExists;
+        }
+        public List<Employee> GetEmployeesBySectionId(int sectionId)
+        {
+            List<int> employeeIds = _redcorpCenterDBContext.SectionsAndEmployees
+                .Where(se => se.Section_Id == sectionId)
+                .Select(se => se.Employees_Id)
+                .ToList();
+
+            List<Employee> employees = _redcorpCenterDBContext.Employees
+                .Where(e => employeeIds.Contains(e.Id))
+                .ToList();
+
+            return employees;
+        }
+        public List<Models.Section> GetSectionsByEmployeeId(int employeeId)
+        {
+            List<Models.Section> sections = new List<Models.Section>();
+
+            List<SectionAndEmployee> sectionAndEmployees = _redcorpCenterDBContext.SectionsAndEmployees
+                .Where(se => se.Employees_Id == employeeId)
+                .ToList();
+
+            foreach (SectionAndEmployee sectionAndEmployee in sectionAndEmployees)
+            {
+                Models.Section section = _redcorpCenterDBContext.Sections.FirstOrDefault(s => s.Id == sectionAndEmployee.Section_Id);
+                if (section != null)
+                {
+                    sections.Add(section);
+                }
+            }
+
+            return sections;
         }
     }
 }

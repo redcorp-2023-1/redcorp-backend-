@@ -542,3 +542,10 @@ C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\obj\Debug
 C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\obj\Debug\net7.0\RedcorpCenter.API.pdb
 C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\obj\Debug\net7.0\RedcorpCenter.API.genruntimeconfig.cache
 C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\obj\Debug\net7.0\ref\RedcorpCenter.API.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\MICROSOFT\Documents\GitHub\redcorp-backend-\RedcorpCenter.API\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
