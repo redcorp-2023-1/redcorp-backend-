@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RedcorpCenter.API.Mapper;
 using RedcorpCenter.Domain;
-using RedcorpCenter.Infra;
-using RedcorpCenter.Infra.Context;
+using RedcorpCenter.Infraestructure;
+using RedcorpCenter.Infraestructure.Context;
 using System.Security.Cryptography;
 using System.Text;
 

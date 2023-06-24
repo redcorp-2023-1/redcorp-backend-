@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RedcorpCenter.Infraestructure\RedcorpCenter.Infraestructure.csproj" />
-    <ProjectReference Include="..\RedcorpCenter.infraestrucure\RedcorpCenter.Infra.csproj" />
   </ItemGroup>
 
 </Project>
