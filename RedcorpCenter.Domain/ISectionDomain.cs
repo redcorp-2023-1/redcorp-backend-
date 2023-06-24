@@ -1,4 +1,4 @@
-﻿using RedcorpCenter.Infra.Models;
+﻿using RedcorpCenter.Infraestructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

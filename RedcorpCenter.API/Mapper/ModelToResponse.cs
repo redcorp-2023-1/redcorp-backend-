@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using RedcorpCenter.API.Response;
-using RedcorpCenter.Infra.Models;
+using RedcorpCenter.Infraestructure.Models;
 
 namespace RedcorpCenter.API.Mapper
 {

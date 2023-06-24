@@ -1,4 +1,4 @@
-﻿using RedcorpCenter.Infra.Models;
+﻿using RedcorpCenter.Infraestructure.Models;
 
 namespace RedcorpCenter.Domain
 {

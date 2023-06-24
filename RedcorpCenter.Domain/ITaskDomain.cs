@@ -1,4 +1,4 @@
-﻿using Task = RedcorpCenter.Infra.Models.Task;
+﻿using Task = RedcorpCenter.Infraestructure.Models.Task;
 
 namespace RedcorpCenter.Domain
 {
