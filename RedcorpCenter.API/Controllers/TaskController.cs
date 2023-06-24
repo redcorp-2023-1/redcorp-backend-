@@ -2,9 +2,9 @@
 using RedcorpCenter.API.Request;
 using RedcorpCenter.API.Response;
 using RedcorpCenter.Domain;
-using RedcorpCenter.Infraestructure.Models;
-using RedcorpCenter.Infraestructure;
-using Task = RedcorpCenter.Infraestructure.Models.Task;
+using RedcorpCenter.Infra.Models;
+using RedcorpCenter.Infra;
+using Task = RedcorpCenter.Infra.Models.Task;
 
 namespace RedcorpCenter.API.Controllers
 {

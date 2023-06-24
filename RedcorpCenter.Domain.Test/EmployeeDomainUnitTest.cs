@@ -1,6 +1,6 @@
 ﻿using Xunit;
-using RedcorpCenter.Infraestructure.Models;
-using RedcorpCenter.Infraestructure;
+using RedcorpCenter.Infra.Models;
+using RedcorpCenter.Infra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +24,9 @@ namespace RedcorpCenter.Domain.Test
 
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
+            var _encryptDomain = new Mock<IEncryptDomain>();
             _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
-            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
+            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,_encryptDomain.Object);
 
 
             //Act
@@ -48,7 +49,8 @@ namespace RedcorpCenter.Domain.Test
 
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
             _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
-            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
+            var _encryptDomain = new Mock<IEncryptDomain>();
+            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,_encryptDomain.Object);
 
             var ex = Assert.Throws<Exception>(() => employeeDomain.Save(employee));
 
@@ -67,9 +69,10 @@ namespace RedcorpCenter.Domain.Test
 
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
+            var _encryptDomain = new Mock<IEncryptDomain>();
             _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
 
-            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
+            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,_encryptDomain.Object);
 
             //Act
             var ex = Assert.Throws<Exception>(() => employeeDomain.Save(employee));
@@ -93,10 +96,11 @@ namespace RedcorpCenter.Domain.Test
             };
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
+            var _encryptDomain = new Mock<IEncryptDomain>();
             _employeeInfraestructure.Setup(t => t.update(employee.Id, employee.Name,employee.last_name,employee.email,employee.area,employee.cargo)).Returns(true);
 
             //Act
-            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object);
+            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object, _encryptDomain.Object);
             var result = employeeDomain.update(employee.Id, employee.Name, employee.last_name, employee.email, employee.area, employee.cargo);
 
             //Assert

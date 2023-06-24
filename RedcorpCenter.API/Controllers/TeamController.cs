@@ -2,8 +2,8 @@
 using RedcorpCenter.API.Request;
 using RedcorpCenter.API.Response;
 using RedcorpCenter.Domain;
-using RedcorpCenter.Infraestructure;
-using RedcorpCenter.Infraestructure.Models;
+using RedcorpCenter.Infra;
+using RedcorpCenter.Infra.Models;
 
 namespace RedcorpCenter.API.Controllers
 {

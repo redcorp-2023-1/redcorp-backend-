@@ -1,5 +1,5 @@
-﻿using RedcorpCenter.Infraestructure;
-using RedcorpCenter.Infraestructure.Models;
+﻿using RedcorpCenter.Infra;
+using RedcorpCenter.Infra.Models;
 
 namespace RedcorpCenter.Domain;
 

@@ -1,5 +1,5 @@
-﻿using RedcorpCenter.Infraestructure;
-using Task = RedcorpCenter.Infraestructure.Models.Task;
+﻿using RedcorpCenter.Infra;
+using Task = RedcorpCenter.Infra.Models.Task;
 
 namespace RedcorpCenter.Domain;
 

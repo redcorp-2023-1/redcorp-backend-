@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using RedcorpCenter.API.Request;
 using RedcorpCenter.API.Response;
 using RedcorpCenter.Domain;
-using RedcorpCenter.Infraestructure;
-using RedcorpCenter.Infraestructure.Models;
+using RedcorpCenter.Infra;
+using RedcorpCenter.Infra.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

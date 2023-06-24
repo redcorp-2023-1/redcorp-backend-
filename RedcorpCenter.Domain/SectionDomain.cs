@@ -1,5 +1,5 @@
-﻿using RedcorpCenter.Infraestructure;
-using RedcorpCenter.Infraestructure.Models;
+﻿using RedcorpCenter.Infra;
+using RedcorpCenter.Infra.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
