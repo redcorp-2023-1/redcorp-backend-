@@ -25,16 +25,18 @@ namespace RedcorpCenter.Domain.Test
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
             var _encryptDomain = new Mock<IEncryptDomain>();
-            _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
-            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,_encryptDomain.Object);
+            var _tokenDomain = new Mock<ITokenDomain>();
+            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
+            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,
+                _encryptDomain.Object,_tokenDomain.Object);
 
 
             //Act
-            var result = employeeDomain.Save(employee);
+            var returnValue = employeeDomain.SaveAsync(employee);
 
 
             //Test
-            Assert.True(result);
+            Assert.True(returnValue.Result);
 
         }
 
@@ -48,13 +50,15 @@ namespace RedcorpCenter.Domain.Test
             };
 
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
-            _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
+            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
             var _encryptDomain = new Mock<IEncryptDomain>();
-            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,_encryptDomain.Object);
+            var _tokenDomain = new Mock<ITokenDomain>();
+            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,
+                _encryptDomain.Object,_tokenDomain.Object);
 
-            var ex = Assert.Throws<Exception>(() => employeeDomain.Save(employee));
+            var ex = Assert.ThrowsAsync<Exception>(() => employeeDomain.SaveAsync(employee));
 
-            Assert.Equal("The length of your name and lastname is invalid(>3)", ex.Message);
+            Assert.Equal("The length of your name and lastname is invalid(>3)", ex.Result.Message);
         }
 
         [Fact]
@@ -70,15 +74,17 @@ namespace RedcorpCenter.Domain.Test
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
             var _encryptDomain = new Mock<IEncryptDomain>();
-            _employeeInfraestructure.Setup(t => t.Save(employee)).Returns(true);
+            var _tokenDomain = new Mock<ITokenDomain>();
+            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
 
-            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,_encryptDomain.Object);
+            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,
+                _encryptDomain.Object,_tokenDomain.Object);
 
             //Act
-            var ex = Assert.Throws<Exception>(() => employeeDomain.Save(employee));
+            var ex = Assert.ThrowsAsync<Exception>(() => employeeDomain.SaveAsync(employee));
 
             //Assert
-            Assert.Equal("the name is more than 20", ex.Message);
+            Assert.Equal("the name is more than 20", ex.Result.Message);
         }
 
         [Fact]
@@ -97,10 +103,12 @@ namespace RedcorpCenter.Domain.Test
             //Mock
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
             var _encryptDomain = new Mock<IEncryptDomain>();
+            var _tokenDomain = new Mock<ITokenDomain>();
             _employeeInfraestructure.Setup(t => t.update(employee.Id, employee.Name,employee.last_name,employee.email,employee.area,employee.cargo)).Returns(true);
 
             //Act
-            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object, _encryptDomain.Object);
+            EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,
+                _encryptDomain.Object, _tokenDomain.Object);
             var result = employeeDomain.update(employee.Id, employee.Name, employee.last_name, employee.email, employee.area, employee.cargo);
 
             //Assert

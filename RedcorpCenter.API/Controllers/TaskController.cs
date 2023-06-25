@@ -5,9 +5,11 @@ using RedcorpCenter.Domain;
 using RedcorpCenter.Infraestructure.Models;
 using RedcorpCenter.Infraestructure;
 using Task = RedcorpCenter.Infraestructure.Models.Task;
+using RedcorpCenter.API.Filter;
 
 namespace RedcorpCenter.API.Controllers
 {
+    [Authorize("user,admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class TaskController : ControllerBase

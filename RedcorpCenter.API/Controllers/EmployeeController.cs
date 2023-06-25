@@ -13,7 +13,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Configuration;
-using Microsoft.AspNetCore.Authorization;
+using RedcorpCenter.API.Filter;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,8 +37,8 @@ namespace RedcorpCenter.API.Controllers
 
         }
 
-  
 
+        [Authorize("user,admin")]
         // GET: api/Tutorial
         [HttpGet]
         public async Task<List<EmployeeResponse>> GetAsync()
@@ -47,7 +48,7 @@ namespace RedcorpCenter.API.Controllers
 
             return _mapper.Map<List<Employee>, List<EmployeeResponse>>(employees);
         }
-
+        [Authorize("user,admin")]
         // GET: api/Tutorial/5
         [HttpGet("{id}", Name = "Get")]
         public EmployeeResponse Get(int id)
@@ -61,10 +62,10 @@ namespace RedcorpCenter.API.Controllers
             return employeeResponse;
 
         }
-
+        [Authorize("user,admin")]
         // POST: api/Tutorial
         [HttpPost]
-        public void Post([FromBody] EmployeeRequest employeeRequest)
+        public async Task<IActionResult> PostAsync([FromBody] EmployeeRequest employeeRequest)
         {
             if (ModelState.IsValid)
             {
@@ -72,23 +73,32 @@ namespace RedcorpCenter.API.Controllers
 
                 var employee = _mapper.Map<EmployeeRequest, Employee>(employeeRequest);
 
-                _employeeDomain.Save(employee);
+                var result = await _employeeDomain.SaveAsync(employee);
+
+                return result ? StatusCode(201) : StatusCode(500);
+            }
+            else
+            {
+                return StatusCode(400);
+            }
+        }
+        [Authorize("user,admin")]
+        // PUT: api/Tutorial/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] EmployeeRequest employeeRequest)
+        {
+            if(ModelState.IsValid)
+            {
+                _employeeDomain.update(id, employeeRequest.Name, employeeRequest.last_name, employeeRequest.email, employeeRequest.area, employeeRequest.cargo);
+
             }
             else
             {
                 StatusCode(400);
             }
+
         }
-
-        // PUT: api/Tutorial/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] EmployeeRequest employeeRequest)
-        {
-            
-
-            _employeeDomain.update(id, employeeRequest.Name, employeeRequest.last_name, employeeRequest.email, employeeRequest.area, employeeRequest.cargo);
-        }
-
+        [Authorize("user,admin")]
         // DELETE: api/Tutorial/5
         [HttpDelete("{id}")]
         public void Delete(int id)
@@ -96,75 +106,42 @@ namespace RedcorpCenter.API.Controllers
             _employeeDomain.delete(id);
         }
 
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost]
-        [Route("login")]
-        public dynamic Login([FromBody] EmployeeRequestLogin requestLogin)
+        [Route("Login")]
+        public async Task<dynamic> Login([FromBody] EmployeeRequestLogin employeeRequestLogin)
         {
-
-
-            string email = requestLogin.email;
-            string password = requestLogin.password; 
-
-            Employee employee = _employeeDomain.LogIn(email, password);
-               
-            if(employee == null)
+            try
             {
+                var user = _mapper.Map<EmployeeRequestLogin, Employee>(employeeRequestLogin);
+
+                var jwt = await _employeeDomain.Login(user);
+                var user_founded = await _employeeDomain.GetByEmail(employeeRequestLogin.email);
+
                 return new
                 {
-                    access = false,
-                    message = "Credenciales incorrectas",
-                    result = "",
-                    id_employee = 0
+                    token = Ok(jwt),
+                    user_id = user_founded.Id
                 };
             }
-
-            var jwt = _configuration.GetSection("Jwt").Get<Jwt>();
-
-            var claims = new[]
+            catch (Exception ex)
             {
-                new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub,jwt.Subject),
-                new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Iat,DateTime.UtcNow.ToString()),
-                new Claim("name",employee.Name),
-                new Claim("email",employee.email)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));
-            var signIn = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                    jwt.Issuer,
-                    jwt.Audience,
-                    claims,
-                    signingCredentials:signIn
-                );
-
-            return new
-            {
-                access = true,
-                message = "Operación exitosa",
-                result = new JwtSecurityTokenHandler().WriteToken(token),
-                employee_id= employee.Id
-            };
-
-
+                
+                return StatusCode(StatusCodes.Status400BadRequest, "Error al procesar");
+            }
         }
-
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost]
         [Route("Signup")]
-        public IActionResult Signup([FromBody] EmployeeRequest employeesignup)
+        public async Task<IActionResult> Signup([FromBody] EmployeeRequest employeesignup)
         {
             var employee = _mapper.Map<EmployeeRequest,Employee>(employeesignup);
-            var id = _employeeDomain.Signup(employee);
+            var id = await _employeeDomain.Signup(employee);
 
             if (id > 0)
-            {
                 return Ok(id.ToString());
-            }
             else
-            {
                 return BadRequest();
-            }
         }
 
 

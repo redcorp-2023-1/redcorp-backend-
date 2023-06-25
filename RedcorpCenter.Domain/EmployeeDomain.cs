@@ -12,22 +12,24 @@ namespace RedcorpCenter.Domain
 {
     public class EmployeeDomain :IEmployeeDomain
     {
-        public IEmployeeInfraestructure _employeeInfraestructure;
+        private IEmployeeInfraestructure _employeeInfraestructure;
         private IEncryptDomain _encryptDomain;
-        public EmployeeDomain(IEmployeeInfraestructure employeeInfraestructure, IEncryptDomain encryptDomain)
+        private ITokenDomain _tokenDomain;
+        public EmployeeDomain(IEmployeeInfraestructure employeeInfraestructure, IEncryptDomain encryptDomain, ITokenDomain tokenDomain)
         {
             _employeeInfraestructure = employeeInfraestructure;
             _encryptDomain = encryptDomain;
+            _tokenDomain = tokenDomain;
         }
 
 
 
-        public bool Save(Employee employee)
+        public async Task<bool> SaveAsync(Employee employee)
         {
             if (!this.IsValidData(employee.Name, employee.last_name)) throw new Exception("The length of your name and lastname is invalid(>3)");
             if (employee.Name.Length > 20) throw new Exception("the name is more than 20");
 
-            return _employeeInfraestructure.Save(employee);
+            return await _employeeInfraestructure.SaveAsync(employee);
         }
 
         public bool update(int id, string name, string last_name, string email, string area, string cargo)
@@ -48,7 +50,7 @@ namespace RedcorpCenter.Domain
             return true;
         }
 
-        public int Signup(Employee employee)
+        public async Task<int> Signup(Employee employee)
         {
             employee.password = _encryptDomain.Encrypt(employee.password);
 
@@ -57,21 +59,26 @@ namespace RedcorpCenter.Domain
                 return 0;
             }
 
-            return _employeeInfraestructure.Signup(employee);   
+            return await _employeeInfraestructure.Signup(employee);   
         }
 
 
 
-        public Employee LogIn(string email, string password)
+        public async Task<string> Login(Employee employee)
         {
-            var foundUser = _employeeInfraestructure.GetByEmail(email);
+            var foundUser = await _employeeInfraestructure.GetByEmail(employee.email);
 
-            if (foundUser != null && _encryptDomain.Encrypt(password) == foundUser.password)
+            if (_encryptDomain.Encrypt(employee.password) == foundUser.password)
             {
-                return foundUser;
+                return _tokenDomain.GenerateJwt(foundUser.email);
             }
 
-            return null;
+            throw new ArgumentException("Invalid email or password");
+        }
+
+        public async Task<Employee> GetByEmail(string email)
+        {
+            return await _employeeInfraestructure.GetByEmail(email);
         }
     }
 }

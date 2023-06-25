@@ -7,6 +7,7 @@ using RedcorpCenter.Infraestructure;
 using RedcorpCenter.Infraestructure.Context;
 using System.Security.Cryptography;
 using System.Text;
+using RedcorpCenter.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,10 +39,20 @@ builder.Services.AddScoped<ISectionAndEmployeeInfraestructure, SectionAndEmploye
 builder.Services.AddScoped<ISectionAndEmployeeDomain, SectionAndEmployeeDomain>();
 
 builder.Services.AddScoped<IEncryptDomain, EncryptDomain>();
-
+builder.Services.AddScoped<ITokenDomain, TokenDomain>();
 //Conexion a MYSQL
 var connectionString = builder.Configuration.GetConnectionString("redcorpCenterConnection");
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
+
+//Jwt   
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+});
+
+
 
 builder.Services.AddDbContext<RedcorpCenterDBContext>(
     dbContextOptions =>
@@ -56,21 +67,6 @@ builder.Services.AddDbContext<RedcorpCenterDBContext>(
     });
 
 builder.Services.AddAutoMapper(typeof(ModelToResponse), typeof(RequestToModel));
-
-//Jwt   
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Issuer"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-    };
-});
 
 //Cors
 builder.Services.AddCors(options =>
@@ -97,6 +93,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

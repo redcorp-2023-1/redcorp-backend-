@@ -4,10 +4,12 @@ using RedcorpCenter.API.Response;
 using RedcorpCenter.Domain;
 using RedcorpCenter.Infraestructure.Models;
 using RedcorpCenter.Infraestructure;
+using RedcorpCenter.API.Filter;
 
 namespace RedcorpCenter.API.Controllers
-{
+{   
     [Route("api/[controller]")]
+    [Authorize("user,admin")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
