@@ -27,14 +27,17 @@ public class ProjectMySQLInfraestructure : IProjectInfraestructure
     {
         try
         {
-            _redcorpCenterDBContext.Projects.Add(project);
+            project.IsActive = true;
+            await _redcorpCenterDBContext.Projects.AddAsync(project);
             await _redcorpCenterDBContext.SaveChangesAsync();
+            return true;
         }
         catch (Exception exception)
         {
             throw;
+            return false;
         }
-        return true;
+        
     }
 
     public bool update(int id, Project project)

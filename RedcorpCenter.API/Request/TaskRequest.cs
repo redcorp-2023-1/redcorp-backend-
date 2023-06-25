@@ -9,6 +9,8 @@ namespace RedcorpCenter.API.Request
         public string Name { get; set; }
         [MaxLength(70)]
         public string Description { get; set; }
+
+        public string StartDate { get; set; }
         public string FinalDate { get; set; }
         [Required]
         public bool IsCompleted { get; set; }

@@ -56,7 +56,7 @@ public class ProjectDomain : IProjectDomain
 
     private bool IsValidStateData(string state)
     {
-        if (state == "In Pogress" || state == "Completed" || state == "To Do" || state == "In Revision") return true;
+        if (state == "In Progress" || state == "Completed" || state == "To Do" || state == "In Revision") return true;
         return false;
     }
 }

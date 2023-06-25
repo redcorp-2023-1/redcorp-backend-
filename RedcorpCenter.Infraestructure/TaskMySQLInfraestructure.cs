@@ -27,14 +27,17 @@ public class TaskMySQLInfraestructure : ITaskInfraestructure
     {
         try
         {
-            _redcorpCenterDBContext.Tasks.Add(task);
+            task.IsActive = true;
+            await _redcorpCenterDBContext.Tasks.AddAsync(task);
             await _redcorpCenterDBContext.SaveChangesAsync();
+            return true;
         }
         catch (Exception exception)
         {
             throw;
+            return false;
         }
-        return true;
+        
     }
 
     public bool update(int id, Task task)

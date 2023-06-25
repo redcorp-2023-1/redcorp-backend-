@@ -1,4 +1,5 @@
-﻿using RedcorpCenter.Infraestructure;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using RedcorpCenter.Infraestructure;
 using RedcorpCenter.Infraestructure.Models;
 
 namespace RedcorpCenter.Domain;
@@ -50,5 +51,10 @@ public class TeamDomain : ITeamDomain
         if (description.Length < 3) return false;
         if (description.Length > 70) return false;
         return true;
+    }
+
+    public List<Infraestructure.Models.Task> GetTasksByIdEmployee(int employee_id)
+    {
+        return GetTasksByIdEmployee(employee_id);
     }
 }

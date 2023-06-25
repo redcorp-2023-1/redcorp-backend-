@@ -27,14 +27,17 @@ public class TeamMySQLInfraestructure : ITeamInfraestructure
     {
         try
         {
-            _redcorpCenterDBContext.Teams.Add(team);
+            team.IsActive = true;
+            await _redcorpCenterDBContext.Teams.AddAsync(team);
             await _redcorpCenterDBContext.SaveChangesAsync();
+            return true;
         }
         catch (Exception exception)
         {
             throw;
+            return false;
         }
-        return true;
+        
     }
 
     public bool update(int id, Team team)
@@ -64,5 +67,25 @@ public class TeamMySQLInfraestructure : ITeamInfraestructure
         _redcorpCenterDBContext.SaveChanges();
 
         return true;
+    }
+
+    public List<Models.Task> GetTaskByIdEmploye(int employeeId)
+    {
+        List<Models.Task> tasks = new List<Models.Task>();
+
+        List<Team> teams = _redcorpCenterDBContext.Teams
+            .Where(team => team.Id_Employee == employeeId)
+            .ToList();
+
+        foreach (Team team in teams)
+        {
+            Models.Task task = _redcorpCenterDBContext.Tasks.FirstOrDefault(t => t.Id == team.Id_Task);
+            if (task != null)
+            {
+                tasks.Add(task);
+            }
+        }
+
+        return tasks;
     }
 }
