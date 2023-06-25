@@ -103,6 +103,20 @@ namespace RedcorpCenter.API.Controllers
             return _teamInfraestructure.GetTaskByIdEmploye(id_employee);
         }
 
+        [HttpGet("GetTeamsById/{id_employee}",Name ="GetTeamsById")]
+        public List<Team> GetTeamsByIdEmployee (int id_employee)
+        {
+            return _teamInfraestructure.GetTeamsById(id_employee);
+        }
+
+        [HttpGet("GetEmployeesContactsByTeamId/{id_employee}", Name = "GetEmployeesContactsByTeamId")]
+        public List<Employee> GetEmployeesByTeamId(int id_employee)
+        {
+            return _teamInfraestructure.GetEmployeesInSameProject(id_employee);
+        }
+
+
+
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

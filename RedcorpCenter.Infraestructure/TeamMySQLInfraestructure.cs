@@ -88,4 +88,37 @@ public class TeamMySQLInfraestructure : ITeamInfraestructure
 
         return tasks;
     }
+    public List<Team> GetTeamsById(int id)
+    {
+        var teams = _redcorpCenterDBContext.Teams
+            .Where(team => team.Id_Employee == id)
+            .ToList()
+            .GroupBy(team => team.Name)
+            .Select(group => group.First())
+            .ToList();
+
+        return teams;
+    }
+
+    public List<Employee> GetEmployeesInSameProject(int employeeId)
+    {
+        // Obtener el área del empleado que realiza la consulta
+        string employeeArea = _redcorpCenterDBContext.Employees
+            .Where(e => e.Id == employeeId)
+            .Select(e => e.area)
+            .FirstOrDefault();
+
+        if (string.IsNullOrEmpty(employeeArea))
+        {
+            // El empleado no existe o no tiene un área definida
+            return new List<Employee>();
+        }
+
+        // Obtener los empleados que pertenecen a la misma área
+        List<Employee> employees = _redcorpCenterDBContext.Employees
+            .Where(e => e.area == employeeArea && e.Id != employeeId)
+            .ToList();
+
+        return employees;
+    }
 }

@@ -12,6 +12,8 @@ namespace RedcorpCenter.Infraestructure
         List<Team> GetAll();
 
         List<Task> GetTaskByIdEmploye(int id);
+        public List<Team> GetTeamsById(int id);
 
+        public List<Employee> GetEmployeesInSameProject(int employeeId);
     }
 }
