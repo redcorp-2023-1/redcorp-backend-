@@ -72,7 +72,7 @@ builder.Services.AddAutoMapper(typeof(ModelToResponse), typeof(RequestToModel));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin", builder =>
-        builder.WithOrigins("http://localhost:5173")
+        builder.WithOrigins("https://redcord-webapp.web.app")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
