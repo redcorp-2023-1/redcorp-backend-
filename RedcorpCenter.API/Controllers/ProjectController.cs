@@ -4,10 +4,12 @@ using RedcorpCenter.API.Response;
 using RedcorpCenter.Domain;
 using RedcorpCenter.Infraestructure.Models;
 using RedcorpCenter.Infraestructure;
+using RedcorpCenter.API.Filter;
 
 namespace RedcorpCenter.API.Controllers
-{
+{   
     [Route("api/[controller]")]
+    [Authorize("user,admin")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
@@ -46,17 +48,29 @@ namespace RedcorpCenter.API.Controllers
         }
         
         [HttpPost]
-        public async void Post([FromBody] ProjectRequest value)
+        public async Task<IActionResult> PostAsync([FromBody] ProjectRequest value)
         {
-            Project project = new Project()
+            if(ModelState.IsValid)
             {
-                Name = value.Name,
-                Description = value.Description,
-                FinalDate = DateTime.Parse(value.FinalDate),
-                State = value.State,
-            };
+                Project project = new Project()
+                {
+                    Name = value.Name,
+                    Description = value.Description,
+                    InitialDate = DateTime.Parse(value.InitialDate),
+                    FinalDate = DateTime.Parse(value.FinalDate),
+                    State = value.State,
+                };
+
+                var result = await _projectDomain.SaveAsync(project);
+
+                return result ? StatusCode(201) : StatusCode(500);
+            }
+            else
+            {
+                return StatusCode(400);
+            }
+
             
-            await _projectDomain.SaveAsync(project);
         }
         
         [HttpPut("{id}")]
@@ -68,6 +82,7 @@ namespace RedcorpCenter.API.Controllers
                 {
                     Name = value.Name,
                     Description = value.Description,
+                    InitialDate = DateTime.Parse(value.InitialDate),
                     FinalDate = DateTime.Parse(value.FinalDate),
                     State = value.State,
                 };

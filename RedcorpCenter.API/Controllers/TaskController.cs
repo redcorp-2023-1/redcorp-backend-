@@ -5,9 +5,11 @@ using RedcorpCenter.Domain;
 using RedcorpCenter.Infraestructure.Models;
 using RedcorpCenter.Infraestructure;
 using Task = RedcorpCenter.Infraestructure.Models.Task;
+using RedcorpCenter.API.Filter;
 
 namespace RedcorpCenter.API.Controllers
 {
+    [Authorize("user,admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class TaskController : ControllerBase
@@ -48,17 +50,28 @@ namespace RedcorpCenter.API.Controllers
         }
         
         [HttpPost]
-        public async void Post([FromBody] TaskRequest value)
+        public async Task<IActionResult> PostAsync([FromBody] TaskRequest value)
         {
-            Task task = new Task()
+            if(ModelState.IsValid)
             {
-                Name = value.Name,
-                Description = value.Description,
-                FinalDate = DateTime.Parse(value.FinalDate),
-                IsCompleted = value.IsCompleted,
-            };
-            
-            await _taskDomain.SaveAsync(task);
+                Task task = new Task()
+                {
+                    Name = value.Name,
+                    Description = value.Description,
+                    InitialDate = DateTime.Parse(value.StartDate),
+                    FinalDate = DateTime.Parse(value.FinalDate),
+                    IsCompleted = value.IsCompleted,
+                };
+
+                var result = await _taskDomain.SaveAsync(task);
+
+                return result ? StatusCode(201):StatusCode(500);
+
+            }
+            else
+            {
+                return StatusCode(400);
+            }
         }
         
         [HttpPut("{id}")]
@@ -70,6 +83,7 @@ namespace RedcorpCenter.API.Controllers
                 {
                     Name = value.Name,
                     Description = value.Description,
+                    InitialDate = DateTime.Parse(value.StartDate),
                     FinalDate = DateTime.Parse(value.FinalDate),
                     IsCompleted = value.IsCompleted,
                 };

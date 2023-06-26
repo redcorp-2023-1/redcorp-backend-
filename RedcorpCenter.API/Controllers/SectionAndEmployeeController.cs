@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RedcorpCenter.API.Filter;
 using RedcorpCenter.API.Request;
 using RedcorpCenter.Domain;
 using RedcorpCenter.Infraestructure;
@@ -8,6 +9,7 @@ using RedcorpCenter.Infraestructure.Models;
 
 namespace RedcorpCenter.API.Controllers
 {
+    [Authorize("user,admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class SectionAndEmployeeController : ControllerBase

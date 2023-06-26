@@ -9,6 +9,7 @@ namespace RedcorpCenter.API.Mapper
         public RequestToModel()
         {
             CreateMap<EmployeeRequest, Employee>();
+            CreateMap<EmployeeRequestLogin, Employee>();
         }
     }
 }

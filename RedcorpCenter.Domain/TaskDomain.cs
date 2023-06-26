@@ -41,7 +41,7 @@ public class TaskDomain : ITaskDomain
     private bool IsValidNameData(string name)
     {
         if (name.Length < 3) return false;
-        if (name.Length > 20) return false;
+        if (name.Length > 40) return false;
         return true;
     }
     

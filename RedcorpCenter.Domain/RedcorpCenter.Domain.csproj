@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RedcorpCenter.Infraestructure\RedcorpCenter.Infraestructure.csproj" />
+    <ProjectReference Include="..\RedcorpCenter.Shared\RedcorpCenter.Shared.csproj" />
   </ItemGroup>
 
 </Project>

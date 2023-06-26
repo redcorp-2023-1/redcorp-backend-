@@ -1,4 +1,5 @@
 ﻿using RedcorpCenter.Infraestructure.Models;
+using Task = RedcorpCenter.Infraestructure.Models.Task;
 
 namespace RedcorpCenter.Infraestructure
 {
@@ -9,5 +10,10 @@ namespace RedcorpCenter.Infraestructure
         public bool update(int id, Team team);
         public bool delete(int id);
         List<Team> GetAll();
+
+        List<Task> GetTaskByIdEmploye(int id);
+        public List<Team> GetTeamsById(int id);
+
+        public List<Employee> GetEmployeesInSameProject(int employeeId);
     }
 }

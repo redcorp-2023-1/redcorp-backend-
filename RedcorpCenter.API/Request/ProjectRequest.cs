@@ -8,6 +8,7 @@ namespace RedcorpCenter.API.Request
         public string Name { get; set; }
         [MaxLength(70)]
         public string Description { get; set; }
+        public string InitialDate { get; set; }
         public string FinalDate { get; set; }
         public string State { get; set; }
     }

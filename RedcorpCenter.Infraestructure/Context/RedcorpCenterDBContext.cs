@@ -28,7 +28,7 @@ namespace RedcorpCenter.Infraestructure.Context
             if (!optionsBuilder.IsConfigured)
             {
                 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-                optionsBuilder.UseMySql("Server=sql10.freemysqlhosting.net,3306;Uid=sql10624184;Pwd=F5z94haRRm;Database=sql10624184;", serverVersion);
+                optionsBuilder.UseMySql("Server=sql10.freemysqlhosting.net,3306;Uid=sql10628538;Pwd=41sdYAiGLY;Database=sql10628538;", serverVersion);
             }
         }
 

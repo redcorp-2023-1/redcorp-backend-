@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RedcorpCenter.API.Filter;
 using RedcorpCenter.API.Request;
 using RedcorpCenter.API.Response;
 using RedcorpCenter.Domain;
 using RedcorpCenter.Infraestructure;
 using RedcorpCenter.Infraestructure.Models;
+using Task = RedcorpCenter.Infraestructure.Models.Task;
 
 namespace RedcorpCenter.API.Controllers
 {
+    [Authorize("user,admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class TeamController : ControllerBase
@@ -47,18 +50,30 @@ namespace RedcorpCenter.API.Controllers
         }
         
         [HttpPost]
-        public async void Post([FromBody] TeamRequest value)
+        public async Task<IActionResult> Post([FromBody] TeamRequest value)
         {
-            Team team = new Team()
+            if(ModelState.IsValid)
             {
-                Name = value.Name,
-                Description = value.Description,
-                Id_Employee = value.Id_Employee,
-                Id_Project = value.Id_Project,
-                Id_Task = value.Id_Task,
-            };
-            
-            await _teamDomain.SaveAsync(team);
+                Team team = new Team()
+                {
+                    Name = value.Name,
+                    Description = value.Description,
+                    Id_Employee = value.Id_Employee,
+                    Id_Project = value.Id_Project,
+                    Id_Task = value.Id_Task,
+                };
+
+                var result = await _teamDomain.SaveAsync(team);
+
+                return result ? StatusCode(201) : StatusCode(500);
+            }
+            else
+            {
+                return StatusCode(400);
+                
+
+            }
+
         }
         
         [HttpPut("{id}")]
@@ -81,7 +96,27 @@ namespace RedcorpCenter.API.Controllers
                 StatusCode(400);
             }
         }
-        
+
+        [HttpGet("GetTasksByIdEmployee/{id_employee}",Name ="GetTasksByIdEmployee")]
+        public List<Task> GetTasksByIdEmployee (int id_employee)
+        {
+            return _teamInfraestructure.GetTaskByIdEmploye(id_employee);
+        }
+
+        [HttpGet("GetTeamsById/{id_employee}",Name ="GetTeamsById")]
+        public List<Team> GetTeamsByIdEmployee (int id_employee)
+        {
+            return _teamInfraestructure.GetTeamsById(id_employee);
+        }
+
+        [HttpGet("GetEmployeesContactsByTeamId/{id_employee}", Name = "GetEmployeesContactsByTeamId")]
+        public List<Employee> GetEmployeesByTeamId(int id_employee)
+        {
+            return _teamInfraestructure.GetEmployeesInSameProject(id_employee);
+        }
+
+
+
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

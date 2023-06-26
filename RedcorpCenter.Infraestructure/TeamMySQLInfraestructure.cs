@@ -27,14 +27,17 @@ public class TeamMySQLInfraestructure : ITeamInfraestructure
     {
         try
         {
-            _redcorpCenterDBContext.Teams.Add(team);
+            team.IsActive = true;
+            await _redcorpCenterDBContext.Teams.AddAsync(team);
             await _redcorpCenterDBContext.SaveChangesAsync();
+            return true;
         }
         catch (Exception exception)
         {
             throw;
+            return false;
         }
-        return true;
+        
     }
 
     public bool update(int id, Team team)
@@ -64,5 +67,58 @@ public class TeamMySQLInfraestructure : ITeamInfraestructure
         _redcorpCenterDBContext.SaveChanges();
 
         return true;
+    }
+
+    public List<Models.Task> GetTaskByIdEmploye(int employeeId)
+    {
+        List<Models.Task> tasks = new List<Models.Task>();
+
+        List<Team> teams = _redcorpCenterDBContext.Teams
+            .Where(team => team.Id_Employee == employeeId)
+            .ToList();
+
+        foreach (Team team in teams)
+        {
+            Models.Task task = _redcorpCenterDBContext.Tasks.FirstOrDefault(t => t.Id == team.Id_Task);
+            if (task != null)
+            {
+                tasks.Add(task);
+            }
+        }
+
+        return tasks;
+    }
+    public List<Team> GetTeamsById(int id)
+    {
+        var teams = _redcorpCenterDBContext.Teams
+            .Where(team => team.Id_Employee == id)
+            .ToList()
+            .GroupBy(team => team.Name)
+            .Select(group => group.First())
+            .ToList();
+
+        return teams;
+    }
+
+    public List<Employee> GetEmployeesInSameProject(int employeeId)
+    {
+        // Obtener el área del empleado que realiza la consulta
+        string employeeArea = _redcorpCenterDBContext.Employees
+            .Where(e => e.Id == employeeId)
+            .Select(e => e.area)
+            .FirstOrDefault();
+
+        if (string.IsNullOrEmpty(employeeArea))
+        {
+            // El empleado no existe o no tiene un área definida
+            return new List<Employee>();
+        }
+
+        // Obtener los empleados que pertenecen a la misma área
+        List<Employee> employees = _redcorpCenterDBContext.Employees
+            .Where(e => e.area == employeeArea && e.Id != employeeId)
+            .ToList();
+
+        return employees;
     }
 }

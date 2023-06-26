@@ -12,5 +12,7 @@
         public string cargo { get; set; }
 
         public string? photo { get; set; }
+
+        public string Roles { get; set; }
     }
 }

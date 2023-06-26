@@ -24,21 +24,31 @@ namespace RedcorpCenter.Infraestructure
             return await _redcorpCenterDBContext.Employees.Where(employee => employee.IsActive).ToListAsync();
         }
 
-        public bool Save(Employee employee)
+        public async Task<bool> SaveAsync(Employee employee)
         {
 
             try
             {
-                _redcorpCenterDBContext.Employees.Add(employee);
-                _redcorpCenterDBContext.SaveChanges();
+                if(employee.cargo == "Supervisor")
+                {
+                    employee.Roles = "admin";
+                }
+                else
+                {
+                    employee.Roles = "user";
+                }
+
+                employee.IsActive = true;   
+                await _redcorpCenterDBContext.Employees.AddAsync(employee);
+                await _redcorpCenterDBContext.SaveChangesAsync();
+                return true;
             }
-
-
             catch (Exception exception)
             {
                 throw;
+                return false;
             }
-            return true;
+            
         }
 
         public bool update(int id, string name, string last_name, string email, string area, string cargo)
@@ -80,18 +90,16 @@ namespace RedcorpCenter.Infraestructure
             return employee;
         }
 
-        public int Signup(Employee employee)
+        public async Task<int> Signup(Employee employee)
         {
             _redcorpCenterDBContext.Employees.Add(employee);
-            _redcorpCenterDBContext.SaveChanges();
+            await _redcorpCenterDBContext.SaveChangesAsync();
             return employee.Id;
         }
 
-        public Employee GetByEmail(string email)
+        public async Task<Employee> GetByEmail(string email)
         {
-            Employee employee = _redcorpCenterDBContext.Employees.SingleOrDefault(e => e.email == email);
-
-            return employee;
+            return await _redcorpCenterDBContext.Employees.SingleAsync(e => e.email == email);
         }
     }
 }

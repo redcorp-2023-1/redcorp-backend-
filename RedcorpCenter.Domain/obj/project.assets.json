@@ -367,6 +367,16 @@
         "runtime": {
           "bin/placeholder/RedcorpCenter.Infraestructure.dll": {}
         }
+      },
+      "RedcorpCenter.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/RedcorpCenter.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RedcorpCenter.Shared.dll": {}
+        }
       }
     }
   },
@@ -977,11 +987,17 @@
       "type": "project",
       "path": "../RedcorpCenter.Infraestructure/RedcorpCenter.Infraestructure.csproj",
       "msbuildProject": "../RedcorpCenter.Infraestructure/RedcorpCenter.Infraestructure.csproj"
+    },
+    "RedcorpCenter.Shared/1.0.0": {
+      "type": "project",
+      "path": "../RedcorpCenter.Shared/RedcorpCenter.Shared.csproj",
+      "msbuildProject": "../RedcorpCenter.Shared/RedcorpCenter.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "RedcorpCenter.Infraestructure >= 1.0.0",
+      "RedcorpCenter.Shared >= 1.0.0",
       "System.IdentityModel.Tokens.Jwt >= 6.15.1"
     ]
   },
@@ -1020,6 +1036,9 @@
           "projectReferences": {
             "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj": {
               "projectPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Infraestructure\\RedcorpCenter.Infraestructure.csproj"
+            },
+            "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Shared\\RedcorpCenter.Shared.csproj": {
+              "projectPath": "C:\\Users\\MICROSOFT\\Documents\\GitHub\\redcorp-backend-\\RedcorpCenter.Shared\\RedcorpCenter.Shared.csproj"
             }
           }
         }

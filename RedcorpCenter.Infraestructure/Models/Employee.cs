@@ -21,6 +21,6 @@ namespace RedcorpCenter.Infraestructure.Models
         public string photo { get; set; }
         public bool IsActive { get; set; }
 
-
+        public string Roles { get; set; }
     }
 }
