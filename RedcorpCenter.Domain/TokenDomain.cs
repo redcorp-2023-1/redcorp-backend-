@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using RedcorpCenter.Domain;
-using RedcorpCenter.share;
+using RedcorpCenter.Shared;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
