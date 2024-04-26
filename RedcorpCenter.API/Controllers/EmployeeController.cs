@@ -38,7 +38,7 @@ namespace RedcorpCenter.API.Controllers
         }
 
 
-        [Authorize("user,admin")]
+        [Authorize("user,admin")]   
         // GET: api/Tutorial
         [HttpGet]
         public async Task<List<EmployeeResponse>> GetAsync()
