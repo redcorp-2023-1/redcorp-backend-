@@ -12,6 +12,7 @@ namespace RedcorpCenter.Domain
         public bool Save(Section section);
         public bool update(int id, string section_name, string description);
         public bool delete(int id);
+        public Task<bool> SaveAsync(Section section);
 
     }
 }

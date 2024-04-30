@@ -42,12 +42,33 @@ namespace RedcorpCenter.Infraestructure
             return _redcorpCenterDBContext.Sections.Find(id);
         }
 
+        public async Task<Section> GetByIdAsync(int id)
+        {
+            return await _redcorpCenterDBContext.Sections.FindAsync(id);
+        }
+
+
+
         public bool Save(Section section)
         {
             try
             {
                 _redcorpCenterDBContext.Sections.Add(section);
                 _redcorpCenterDBContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al guardar la sección en la base de datos.", ex);
+            }
+            return true;
+        }
+        
+        public async Task<bool> SaveAsync(Section section)
+        {
+            try
+            {
+                await _redcorpCenterDBContext.Sections.AddAsync(section);
+                await _redcorpCenterDBContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {

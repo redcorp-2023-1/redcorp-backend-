@@ -33,53 +33,94 @@ namespace RedcorpCenter.API.Controllers
         [HttpGet]
         public async Task<List<SectionResponse>> GetAsync()
         {
-            var sections = await _sectionInfraestructure.GetAllAsync();
-            return _mapper.Map<List<Section>, List<SectionResponse>>(sections);
+            try
+            {
+                var sections = await _sectionInfraestructure.GetAllAsync();
+                return _mapper.Map<List<Section>, List<SectionResponse>>(sections);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
 
         }
 
         // GET api/<SectionController>/5
         [HttpGet("{id}", Name = "GetSection")]
-        public SectionResponse Get(int id)
+        public async Task<SectionResponse> GetByIdAsync(int id)
         {
-            Section section = _sectionInfraestructure.GetById(id);
+            try
+            {
+                Section section = await _sectionInfraestructure.GetByIdAsync(id);
+                
+                var sectionResponse = _mapper.Map<Section, SectionResponse>(section);
 
-            
-            var sectionResponse = _mapper.Map<Section, SectionResponse>(section);
+                return sectionResponse;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
-            return sectionResponse;
         }
 
         // POST api/<SectionController>
         [HttpPost]
-        public void Post([FromBody] SectionRequest sectionRequest)
+        public async Task<IActionResult> PostAsync([FromBody] SectionRequest sectionRequest)
         {
-            if (ModelState.IsValid)
+            try
             {
-               
-                var section = _mapper.Map<SectionRequest, Section>(sectionRequest);
+                if (ModelState.IsValid)
+                {
+                    var section = _mapper.Map<SectionRequest, Section>(sectionRequest);
 
-                _sectionDomain.Save(section);
+                    var result = await _sectionDomain.SaveAsync(section);
+
+                    return result ? StatusCode(201) : StatusCode(500);
+                }
+                else
+                {
+                    return StatusCode(400);
+                }
             }
-            else
+            catch (Exception e)
             {
-                StatusCode(400);
+                return StatusCode(500);
             }
-
+            
         }
 
         // PUT api/<SectionController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] SectionRequest sectionRequest)
+        public IActionResult Put(int id, [FromBody] SectionRequest sectionRequest)
         {
-            _sectionDomain.update(id, sectionRequest.Section_Name, sectionRequest.Description);
+            try
+            {
+                _sectionDomain.update(id, sectionRequest.Section_Name, sectionRequest.Description);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
         }
 
         // DELETE api/<SectionController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            _sectionDomain.delete(id);
+            try
+            {
+                _sectionDomain.delete(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
         }
     }
 }
