@@ -30,6 +30,7 @@ namespace RedcorpCenter.API.Controllers
 
 
         // GET: api/<SectionController>
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpGet]
         public async Task<List<SectionResponse>> GetAsync()
         {
@@ -48,6 +49,7 @@ namespace RedcorpCenter.API.Controllers
         }
 
         // GET api/<SectionController>/5
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpGet("{id}", Name = "GetSection")]
         public async Task<SectionResponse> GetByIdAsync(int id)
         {
@@ -68,6 +70,7 @@ namespace RedcorpCenter.API.Controllers
         }
 
         // POST api/<SectionController>
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SectionRequest sectionRequest)
         {
@@ -76,9 +79,7 @@ namespace RedcorpCenter.API.Controllers
                 if (ModelState.IsValid)
                 {
                     var section = _mapper.Map<SectionRequest, Section>(sectionRequest);
-
                     var result = await _sectionDomain.SaveAsync(section);
-
                     return result ? StatusCode(201) : StatusCode(500);
                 }
                 else
@@ -94,27 +95,29 @@ namespace RedcorpCenter.API.Controllers
         }
 
         // PUT api/<SectionController>/5
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] SectionRequest sectionRequest)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SectionRequest sectionRequest)
         {
             try
             {
-                _sectionDomain.update(id, sectionRequest.Section_Name, sectionRequest.Description);
+                await _sectionDomain.UpdateAsync(id, sectionRequest.Section_Name, sectionRequest.Description);
                 return Ok();
             }
             catch (Exception e)
             {
-                return StatusCode(500);
+                return StatusCode(500, e);
             }
         }
 
         // DELETE api/<SectionController>/5
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             try
             {
-                _sectionDomain.delete(id);
+                await _sectionDomain.DeleteAsync(id);
                 return Ok();
             }
             catch (Exception e)

@@ -26,21 +26,32 @@ namespace RedcorpCenter.Domain
 
         public async Task<bool> SaveAsync(Employee employee)
         {
-            if (!this.IsValidData(employee.Name, employee.last_name)) throw new Exception("The length of your name and lastname is invalid(>3)");
-            if (employee.Name.Length > 20) throw new Exception("the name is more than 20");
+            if (!this.IsValidData(employee.Name, employee.last_name)) throw new Exception("La longitud del nombre o apellido es menor a 3 caracteres");
+            if (employee.Name.Length > 20) throw new Exception("La longitud del nombre es mayor a 20 caracteres");
 
             return await _employeeInfraestructure.SaveAsync(employee);
         }
 
         public bool update(int id, string name, string last_name, string email, string area, string cargo)
         {
-            if (!this.IsValidData(name, last_name)) throw new Exception("The length of your name is invalid");
+            if (!this.IsValidData(name, last_name)) throw new Exception("La longitud del nombre o apellido es inválida");
             return _employeeInfraestructure.update(id, name, last_name, email, area, cargo);
+        }
+        
+        public async Task<bool> UpdateAsync(int id, string name, string last_name, string email, string area, string cargo)
+        {
+            if (!this.IsValidData(name, last_name)) throw new Exception("La longitud de tu nombre es inválida");
+            return await _employeeInfraestructure.UpdateAsync(id, name, last_name, email, area, cargo);
         }
 
         public bool delete(int id)
         {
             return _employeeInfraestructure.delete(id);
+        }
+        
+        public async Task<bool> DeleteAsync(int id)
+        {
+            return await _employeeInfraestructure.DeleteAsync(id);
         }
 
 
@@ -73,7 +84,7 @@ namespace RedcorpCenter.Domain
                 return _tokenDomain.GenerateJwt(foundUser.email);
             }
 
-            throw new ArgumentException("Invalid email or password");
+            throw new ArgumentException("Email o contraseña inválida");
         }
 
         public async Task<Employee> GetByEmail(string email)

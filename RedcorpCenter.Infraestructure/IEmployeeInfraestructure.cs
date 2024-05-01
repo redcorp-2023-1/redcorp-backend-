@@ -18,5 +18,8 @@ namespace RedcorpCenter.Infraestructure
         public Task<int> Signup  (Employee employee);
         Employee GetByLogin(string email, string password);
         Task<List<Employee>> GetAllAsync();
+        Task<Employee> GetByIdAsync(int id);
+        public Task<bool> UpdateAsync(int id, string name, string last_name, string email, string area, string cargo);
+        public Task<bool> DeleteAsync(int id);
     }
 }

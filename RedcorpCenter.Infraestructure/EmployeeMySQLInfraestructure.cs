@@ -21,12 +21,19 @@ namespace RedcorpCenter.Infraestructure
 
         public async Task<List<Employee>> GetAllAsync()
         {
-            return await _redcorpCenterDBContext.Employees.Where(employee => employee.IsActive).ToListAsync();
+            try
+            {
+                return await _redcorpCenterDBContext.Employees.Where(employee => employee.IsActive).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al obtener todos los empleados de la base de datos", e);
+            }
+
         }
 
         public async Task<bool> SaveAsync(Employee employee)
         {
-
             try
             {
                 if(employee.cargo == "Supervisor")
@@ -45,8 +52,7 @@ namespace RedcorpCenter.Infraestructure
             }
             catch (Exception exception)
             {
-                throw;
-                return false;
+                throw new Exception("Error al guardar el nuevo usuario en la base de datos", exception);
             }
             
         }
@@ -64,18 +70,51 @@ namespace RedcorpCenter.Infraestructure
 
             return true;
         }
+        
+        public async Task<bool> UpdateAsync(int id, string name, string last_name, string email, string area, string cargo)
+        {
+            try
+            {
+                Employee _employee = await _redcorpCenterDBContext.Employees.FindAsync(id);
+                _employee.Name = name;
+                _employee.last_name = last_name;
+                _employee.email = email;
+                _redcorpCenterDBContext.Employees.Update(_employee);
+                await _redcorpCenterDBContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al actualizar el usuario en la base de datos.", e);
+            }
+
+        }
 
         public bool delete(int id)
         {
             Employee employee = _redcorpCenterDBContext.Employees.Find(id);
-
             employee.IsActive = false;
-
             _redcorpCenterDBContext.Employees.Update(employee);
-
             _redcorpCenterDBContext.SaveChanges();
-
             return true;
+        }
+        
+        public async Task<bool> DeleteAsync(int id)
+        {
+            try
+            {
+                Employee employee = await _redcorpCenterDBContext.Employees.FindAsync(id);
+                employee.IsActive = false;
+                _redcorpCenterDBContext.Employees.Update(employee);
+                await _redcorpCenterDBContext.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al borrar al usuario en la base de datos", e);
+            }
+
         }
 
         public Employee GetById(int id)
@@ -83,6 +122,19 @@ namespace RedcorpCenter.Infraestructure
             return _redcorpCenterDBContext.Employees.Find(id);
         }
 
+        public async Task<Employee> GetByIdAsync(int id)
+        {
+            try
+            {
+                return await _redcorpCenterDBContext.Employees.FindAsync(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al obtener al usuario con el id especificado en la base de datos.");
+            }
+
+        }
+        
         public Employee GetByLogin(string email, string password)
         {
             Employee employee = _redcorpCenterDBContext.Employees.Where(x => x.email == email && x.password == password).FirstOrDefault();

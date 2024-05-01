@@ -18,6 +18,8 @@ namespace RedcorpCenter.Domain
         Task<string> Login(Employee employee);
 
         Task<Employee> GetByEmail(string username);
+        public Task<bool> UpdateAsync(int id, string name, string last_name, string email, string area, string cargo);
+        public Task<bool> DeleteAsync(int id);
 
     }
 }

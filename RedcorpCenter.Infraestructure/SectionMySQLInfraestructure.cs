@@ -21,20 +21,40 @@ namespace RedcorpCenter.Infraestructure
         public bool delete(int id)
         {
             Section section = _redcorpCenterDBContext.Sections.Find(id);
-
             section.IsActive = false;
-
             _redcorpCenterDBContext.Sections.Update(section);
-
             _redcorpCenterDBContext.SaveChanges();
-
             return true;
+
+        }
+        
+        public async Task<bool> DeleteAsync(int id)
+        {
+            try
+            {
+                Section section = await _redcorpCenterDBContext.Sections.FindAsync(id);
+                section.IsActive = false;
+                _redcorpCenterDBContext.Sections.Update(section);
+                await _redcorpCenterDBContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al eliminar la seccion de la base de datos",e);
+            }
 
         }
 
         public async Task<List<Section>> GetAllAsync()
         {
-            return await _redcorpCenterDBContext.Sections.Where(section => section.IsActive).ToListAsync();
+            try
+            {
+                return await _redcorpCenterDBContext.Sections.Where(section => section.IsActive).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al obtener todas las secciones de la base de datos",e);
+            }
         }
 
         public Section GetById(int id)
@@ -44,7 +64,15 @@ namespace RedcorpCenter.Infraestructure
 
         public async Task<Section> GetByIdAsync(int id)
         {
-            return await _redcorpCenterDBContext.Sections.FindAsync(id);
+            try
+            {
+                return await _redcorpCenterDBContext.Sections.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener la sección con el id especificado en la base de datos",ex);
+            }
+
         }
 
 
@@ -69,12 +97,13 @@ namespace RedcorpCenter.Infraestructure
             {
                 await _redcorpCenterDBContext.Sections.AddAsync(section);
                 await _redcorpCenterDBContext.SaveChangesAsync();
+                return true;
             }
             catch (Exception ex)
             {
                 throw new Exception("Error al guardar la sección en la base de datos.", ex);
             }
-            return true;
+
         }
 
         public bool update(int id, string section_name, string description)
@@ -87,6 +116,24 @@ namespace RedcorpCenter.Infraestructure
             _redcorpCenterDBContext.SaveChanges();
 
             return true;
+        }
+        
+        public async Task<bool> UpdateAsync(int id, string section_name, string description)
+        {
+            try
+            {
+                Section section = await _redcorpCenterDBContext.Sections.FindAsync(id);
+                section.Section_Name = section_name;
+                section.Description = description;
+                
+                _redcorpCenterDBContext.Sections.Update(section);
+                await _redcorpCenterDBContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al actualizar la sección en la base de datos.",e);
+            }
         }
     }
 }

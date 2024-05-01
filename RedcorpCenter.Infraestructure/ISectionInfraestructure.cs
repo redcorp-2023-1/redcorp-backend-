@@ -16,5 +16,7 @@ namespace RedcorpCenter.Infraestructure
         Task<List<Section>> GetAllAsync();
         Task<Section> GetByIdAsync(int id);
         Task<bool> SaveAsync(Section section);
+        Task<bool> UpdateAsync(int id, string section_name, string description);
+        Task<bool> DeleteAsync(int id);
     }
 }
