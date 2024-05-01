@@ -30,7 +30,6 @@ namespace RedcorpCenter.API.Controllers
 
 
         // GET: api/<SectionController>
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpGet]
         public async Task<List<SectionResponse>> GetAsync()
         {
@@ -49,7 +48,6 @@ namespace RedcorpCenter.API.Controllers
         }
 
         // GET api/<SectionController>/5
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpGet("{id}", Name = "GetSection")]
         public async Task<SectionResponse> GetByIdAsync(int id)
         {
@@ -70,7 +68,6 @@ namespace RedcorpCenter.API.Controllers
         }
 
         // POST api/<SectionController>
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SectionRequest sectionRequest)
         {
@@ -95,7 +92,6 @@ namespace RedcorpCenter.API.Controllers
         }
 
         // PUT api/<SectionController>/5
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(int id, [FromBody] SectionRequest sectionRequest)
         {
@@ -111,7 +107,6 @@ namespace RedcorpCenter.API.Controllers
         }
 
         // DELETE api/<SectionController>/5
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {

@@ -18,18 +18,18 @@ namespace RedcorpCenter.Domain
         }
 
 
-        public bool Save(SectionAndEmployee sectionAndEmployee)
+        public async Task<bool> SaveAsync(SectionAndEmployee sectionAndEmployee)
         {
-            return _sectionAndEmployeeInfraestructure.Save(sectionAndEmployee);
+            return await _sectionAndEmployeeInfraestructure.SaveAsync(sectionAndEmployee);
         }
 
-        public bool update(int id, int Section_id, int Employee_id)
+        public async Task<bool> UpdateAsync(int id, int Section_id, int Employee_id)
         {
-            return _sectionAndEmployeeInfraestructure.update(id, Section_id, Employee_id);
+            return await _sectionAndEmployeeInfraestructure.UpdateAsync(id, Section_id, Employee_id);
         }
-        public bool delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            return _sectionAndEmployeeInfraestructure.delete(id);
+            return await _sectionAndEmployeeInfraestructure.DeleteAsync(id);
         }
     }
 }
