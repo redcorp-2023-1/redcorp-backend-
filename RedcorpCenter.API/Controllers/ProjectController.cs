@@ -7,7 +7,7 @@ using RedcorpCenter.Infraestructure;
 using RedcorpCenter.API.Filter;
 
 namespace RedcorpCenter.API.Controllers
-{   
+{
     [Route("api/[controller]")]
     [Authorize("user,admin")]
     [ApiController]
@@ -15,91 +15,126 @@ namespace RedcorpCenter.API.Controllers
     {
         private IProjectInfraestructure _projectInfraestructure;
         private IProjectDomain _projectDomain;
-        
+
         public ProjectController(IProjectInfraestructure projectInfraestructure, IProjectDomain projectdomain)
         {
             _projectInfraestructure = projectInfraestructure;
             _projectDomain = projectdomain;
         }
-        
+
         [HttpGet]
-        public List<Project> Get()
+        public IActionResult Get()
         {
-            return _projectInfraestructure.GetAll();
-        }
-        
-        [HttpGet("{projectId}")]
-        //[HttpGet("{id}", Name = "Get")]
-        public ProjectResponse GetProjectById(int id)
-        {
-            Project project = _projectInfraestructure.GetById(id);
-            
-            ProjectResponse projectResponse = new ProjectResponse()
+            try
             {
-                Id = project.Id,
-                Name = project.Name,
-                Description = project.Description,
-                StartDate = project.InitialDate,
-                EndDate = project.FinalDate,
-                State = project.State,
-            };
-            
-            return projectResponse;
+                var projects = _projectInfraestructure.GetAll();
+                return Ok(projects);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
-        
+
+        [HttpGet("{projectId}")]
+        public IActionResult GetProjectById(int id)
+        {
+            try
+            {
+                var project = _projectInfraestructure.GetById(id);
+                if (project == null)
+                    return NotFound();
+
+                var projectResponse = new ProjectResponse()
+                {
+                    Id = project.Id,
+                    Name = project.Name,
+                    Description = project.Description,
+                    StartDate = project.InitialDate,
+                    EndDate = project.FinalDate,
+                    State = project.State,
+                };
+
+                return Ok(projectResponse);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] ProjectRequest value)
         {
-            if(ModelState.IsValid)
+            try
             {
-                Project project = new Project()
+                if (ModelState.IsValid)
                 {
-                    Name = value.Name,
-                    Description = value.Description,
-                    InitialDate = DateTime.Parse(value.InitialDate),
-                    FinalDate = DateTime.Parse(value.FinalDate),
-                    State = value.State,
-                };
+                    Project project = new Project()
+                    {
+                        Name = value.Name,
+                        Description = value.Description,
+                        InitialDate = DateTime.Parse(value.InitialDate),
+                        FinalDate = DateTime.Parse(value.FinalDate),
+                        State = value.State,
+                    };
 
-                var result = await _projectDomain.SaveAsync(project);
+                    var result = await _projectDomain.SaveAsync(project);
 
-                return result ? StatusCode(201) : StatusCode(500);
+                    return result ? StatusCode(201) : StatusCode(500);
+                }
+                else
+                {
+                    return StatusCode(400);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return StatusCode(400);
+                return StatusCode(500, ex.Message);
             }
-
-            
         }
-        
+
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ProjectRequest value)
+        public IActionResult Put(int id, [FromBody] ProjectRequest value)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Project project = new Project()
+                if (ModelState.IsValid)
                 {
-                    Name = value.Name,
-                    Description = value.Description,
-                    InitialDate = DateTime.Parse(value.InitialDate),
-                    FinalDate = DateTime.Parse(value.FinalDate),
-                    State = value.State,
-                };
-                _projectDomain.update(id, project);
+                    Project project = new Project()
+                    {
+                        Name = value.Name,
+                        Description = value.Description,
+                        InitialDate = DateTime.Parse(value.InitialDate),
+                        FinalDate = DateTime.Parse(value.FinalDate),
+                        State = value.State,
+                    };
+                    _projectDomain.update(id, project);
+                    return NoContent();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                StatusCode(400);
+                return StatusCode(500, ex.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            _projectDomain.delete(id);
+            try
+            {
+                _projectDomain.delete(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }
-
-
