@@ -20,6 +20,10 @@ namespace RedcorpCenter.Domain
 
         public async Task<bool> SaveAsync(SectionAndEmployee sectionAndEmployee)
         {
+            //Validation
+            if (!ValidIdSection(sectionAndEmployee.Section_Id)) throw new Exception("El id del Section es invalido");
+            if (!ValidIdEmployee(sectionAndEmployee.Employees_Id)) throw new Exception("El id del Employee es invalido");
+            
             return await _sectionAndEmployeeInfraestructure.SaveAsync(sectionAndEmployee);
         }
 
@@ -30,6 +34,20 @@ namespace RedcorpCenter.Domain
         public async Task<bool> DeleteAsync(int id)
         {
             return await _sectionAndEmployeeInfraestructure.DeleteAsync(id);
+        }
+
+        private bool ValidIdSection(int Section_Id)
+        {
+            if (Section_Id < 1) return false;
+
+            return true;
+        }
+        
+        private bool ValidIdEmployee(int Employee_Id)
+        {
+            if (Employee_Id < 1) return false;
+
+            return true;
         }
     }
 }

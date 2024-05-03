@@ -58,7 +58,7 @@ namespace RedcorpCenter.Domain.Test
 
             var ex = Assert.ThrowsAsync<Exception>(() => employeeDomain.SaveAsync(employee));
 
-            Assert.Equal("The length of your name and lastname is invalid(>3)", ex.Result.Message);
+            Assert.Equal("La longitud del nombre o apellido es menor a 3 caracteres", ex.Result.Message);
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace RedcorpCenter.Domain.Test
             var ex = Assert.ThrowsAsync<Exception>(() => employeeDomain.SaveAsync(employee));
 
             //Assert
-            Assert.Equal("the name is more than 20", ex.Result.Message);
+            Assert.Equal("La longitud del nombre es mayor a 20 caracteres", ex.Result.Message);
         }
 
         [Fact]
