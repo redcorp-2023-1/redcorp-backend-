@@ -10,6 +10,7 @@ namespace RedcorpCenter.API.Mapper
         {
             CreateMap<EmployeeRequest, Employee>();
             CreateMap<EmployeeRequestLogin, Employee>();
+            CreateMap<EmployeeRequestPut,Employee>();
         }
     }
 }

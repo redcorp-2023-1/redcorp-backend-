@@ -39,9 +39,9 @@ namespace RedcorpCenter.Infraestructure
             {
                 return await _redcorpCenterDBContext.SectionsAndEmployees.FindAsync(id);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception("Error al obtener el SectionAndEmployee con el id especificado en la base de datos.");
+                throw new Exception("Error al obtener el SectionAndEmployee con el id especificado en la base de datos.", ex);
             }
 
         }
@@ -64,7 +64,7 @@ namespace RedcorpCenter.Infraestructure
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al guardar SectionAndEmployee en la base de datos.");
+                throw new Exception("Error al guardar SectionAndEmployee en la base de datos.",ex);
             }
 
         }
@@ -84,7 +84,7 @@ namespace RedcorpCenter.Infraestructure
             }
             catch (Exception e)
             {
-                throw new Exception("Error al actualizar SectionAndEmployee en la base de datos.");
+                throw new Exception("Error al actualizar SectionAndEmployee en la base de datos.",e);
             }
  
         }

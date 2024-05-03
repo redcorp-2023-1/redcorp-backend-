@@ -14,12 +14,12 @@ namespace RedcorpCenter.Infraestructure
         public bool update(int id, string name, string last_name, string email, string area, string cargo);
         public bool delete(int id);
 
-        public Task<Employee> GetByEmail (string email);
-        public Task<int> Signup  (Employee employee);
-        Employee GetByLogin(string email, string password);
+        public Task<Employee> GetByEmailAsync(string email);
+        public Task<int> Signup (Employee employee);
+        Task<Employee> GetByLogin(string email, string password);
         Task<List<Employee>> GetAllAsync();
         Task<Employee> GetByIdAsync(int id);
-        public Task<bool> UpdateAsync(int id, string name, string last_name, string email, string area, string cargo);
+        public Task<bool> UpdateAsync(int id, Employee employee);
         public Task<bool> DeleteAsync(int id);
     }
 }

@@ -28,7 +28,7 @@ namespace RedcorpCenter.Infraestructure.Context
             if (!optionsBuilder.IsConfigured)
             {
                 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-                optionsBuilder.UseMySql("Server=sql10.freemysqlhosting.net,3306;Uid=sql10628538;Pwd=41sdYAiGLY;Database=sql10628538;", serverVersion);
+                optionsBuilder.UseMySql("Server=localhost,3306;Uid=root;Pwd=12345678;Database=redcorpcenterdb;", serverVersion);
                 
             }
         }
@@ -46,8 +46,14 @@ namespace RedcorpCenter.Infraestructure.Context
             modelBuilder.Entity<Employee>().ToTable("Employees");
             modelBuilder.Entity<Employee>().HasKey(p => p.Id);
             modelBuilder.Entity<Employee>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<Employee>().Property(p => p.Name).IsRequired().HasMaxLength(30);
+            modelBuilder.Entity<Employee>().Property(p => p.last_name).IsRequired().HasMaxLength(30);
+            modelBuilder.Entity<Employee>().Property(p => p.dni).IsRequired().HasMaxLength(8);
+            modelBuilder.Entity<Employee>().Property(p => p.email).IsRequired();
+            modelBuilder.Entity<Employee>().Property(p => p.area).IsRequired();
+            modelBuilder.Entity<Employee>().Property(p => p.cargo).IsRequired();
             modelBuilder.Entity<Employee>().Property(p => p.IsActive).HasDefaultValue(true);
-            
+
             modelBuilder.Entity<Project>().ToTable("Projects");
             modelBuilder.Entity<Project>().HasKey(p => p.Id);
             modelBuilder.Entity<Project>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();

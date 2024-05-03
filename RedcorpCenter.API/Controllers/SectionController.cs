@@ -84,7 +84,7 @@ namespace RedcorpCenter.API.Controllers
                     return StatusCode(400);
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return StatusCode(500);
             }

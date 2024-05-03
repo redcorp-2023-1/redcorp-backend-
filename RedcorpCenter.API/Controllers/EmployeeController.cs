@@ -105,18 +105,18 @@ namespace RedcorpCenter.API.Controllers
         [Authorize("user,admin")]
         // PUT: api/Tutorial/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] EmployeeRequest employeeRequest)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] EmployeeRequestPut employeeRequest)
         {
             try
             {
                 if(ModelState.IsValid)
                 {
-                    await _employeeDomain.UpdateAsync(id, employeeRequest.Name, employeeRequest.last_name, employeeRequest.email, employeeRequest.area, employeeRequest.cargo);
-                    return StatusCode(201);
+                    await _employeeDomain.UpdateAsync(id, _mapper.Map<EmployeeRequestPut, Employee>(employeeRequest));
+                    return Ok();
                 }
                 else
                 {
-                    return StatusCode(400);
+                    return BadRequest();
                 }
             }
             catch (Exception e)
@@ -168,13 +168,23 @@ namespace RedcorpCenter.API.Controllers
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost]
         [Route("Signup")]
-        public async Task<IActionResult> Signup([FromBody] EmployeeRequest employeesignup)
+        public async Task<dynamic> Signup([FromBody] EmployeeRequest employeesignup)
         {
-            var employee = _mapper.Map<EmployeeRequest,Employee>(employeesignup);
+            var employee = _mapper.Map<EmployeeRequest, Employee>(employeesignup);
             var id = await _employeeDomain.Signup(employee);
 
             if (id > 0)
-                return Ok(id.ToString());
+            {
+                var employeeSignup = _mapper.Map<EmployeeRequest, Employee>(employeesignup);
+                var jwt = await _employeeDomain.Login(employeeSignup);
+                var user_founded = await _employeeDomain.GetByEmail(employeeSignup.email);
+
+                return new
+                {
+                    token = Ok(jwt),
+                    user_id = user_founded.Id
+                };
+            }
             else
                 return BadRequest();
         }

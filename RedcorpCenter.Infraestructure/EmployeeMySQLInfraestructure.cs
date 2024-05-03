@@ -71,14 +71,21 @@ namespace RedcorpCenter.Infraestructure
             return true;
         }
         
-        public async Task<bool> UpdateAsync(int id, string name, string last_name, string email, string area, string cargo)
+        public async Task<bool> UpdateAsync(int id, Employee employee)
         {
             try
             {
-                Employee _employee = await _redcorpCenterDBContext.Employees.FindAsync(id);
-                _employee.Name = name;
-                _employee.last_name = last_name;
-                _employee.email = email;
+                Employee _employee = await _redcorpCenterDBContext.Employees.FirstOrDefaultAsync(x => x.Id == id);
+                if (_employee == null)
+                    return false;
+
+                _employee.Name = employee.Name;
+                _employee.last_name = employee.last_name;
+                _employee.email = employee.email;
+                _employee.area = employee.area;
+                _employee.cargo = employee.cargo;
+                _employee.photo = employee.photo;
+
                 _redcorpCenterDBContext.Employees.Update(_employee);
                 await _redcorpCenterDBContext.SaveChangesAsync();
                 return true;
@@ -128,30 +135,62 @@ namespace RedcorpCenter.Infraestructure
             {
                 return await _redcorpCenterDBContext.Employees.FindAsync(id);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception("Error al obtener al usuario con el id especificado en la base de datos.");
+                throw new Exception("Error al obtener al usuario con el id especificado en la base de datos.", ex);
             }
 
         }
         
-        public Employee GetByLogin(string email, string password)
+        public async Task<Employee> GetByLogin(string email, string password)
         {
-            Employee employee = _redcorpCenterDBContext.Employees.Where(x => x.email == email && x.password == password).FirstOrDefault();
-
-            return employee;
+            try
+            {
+                Employee employee = await _redcorpCenterDBContext.Employees.FirstOrDefaultAsync(x => x.email == email && x.password == password);
+                return employee;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener login.", ex);
+            }
         }
 
         public async Task<int> Signup(Employee employee)
         {
-            _redcorpCenterDBContext.Employees.Add(employee);
-            await _redcorpCenterDBContext.SaveChangesAsync();
-            return employee.Id;
+            try
+            {
+
+                if (employee.cargo == "Supervisor")
+                {
+                    employee.Roles = "admin";
+                }
+                else
+                {
+                    employee.Roles = "user";
+                }
+
+                _redcorpCenterDBContext.Employees.Add(employee);
+                await _redcorpCenterDBContext.SaveChangesAsync();
+                return employee.Id;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al registrar empleado.", ex);
+            }
         }
 
-        public async Task<Employee> GetByEmail(string email)
+        
+
+        public async Task<Employee> GetByEmailAsync(string email)
         {
-            return await _redcorpCenterDBContext.Employees.SingleAsync(e => e.email == email);
+            try
+            {
+                return await _redcorpCenterDBContext.Employees.FirstOrDefaultAsync(e => e.email == email);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el email del empleado.", ex);
+            }
         }
     }
 }

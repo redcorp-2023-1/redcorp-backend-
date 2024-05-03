@@ -38,10 +38,10 @@ namespace RedcorpCenter.Domain
             return _employeeInfraestructure.update(id, name, last_name, email, area, cargo);
         }
         
-        public async Task<bool> UpdateAsync(int id, string name, string last_name, string email, string area, string cargo)
+        public async Task<bool> UpdateAsync(int id, Employee employee)
         {
-            if (!this.IsValidData(name, last_name)) throw new Exception("La longitud de tu nombre es inválida");
-            return await _employeeInfraestructure.UpdateAsync(id, name, last_name, email, area, cargo);
+            if (!this.IsValidData(employee.Name, employee.last_name)) throw new Exception("La longitud de tu nombre es inválida");
+            return await _employeeInfraestructure.UpdateAsync(id, employee);
         }
 
         public bool delete(int id)
@@ -77,7 +77,7 @@ namespace RedcorpCenter.Domain
 
         public async Task<string> Login(Employee employee)
         {
-            var foundUser = await _employeeInfraestructure.GetByEmail(employee.email);
+            var foundUser = await _employeeInfraestructure.GetByEmailAsync(employee.email);
 
             if (_encryptDomain.Encrypt(employee.password) == foundUser.password)
             {
@@ -89,7 +89,7 @@ namespace RedcorpCenter.Domain
 
         public async Task<Employee> GetByEmail(string email)
         {
-            return await _employeeInfraestructure.GetByEmail(email);
+            return await _employeeInfraestructure.GetByEmailAsync(email);
         }
     }
 }
