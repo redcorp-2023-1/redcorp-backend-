@@ -69,17 +69,30 @@ builder.Services.AddDbContext<RedcorpCenterDBContext>(
 builder.Services.AddAutoMapper(typeof(ModelToResponse), typeof(RequestToModel));
 
 //Cors
+/*
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin", builder =>
-        builder.WithOrigins("https://redcord-webapp.web.app")
+        builder.WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});*/
+
+//Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+        builder.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
 
 var app = builder.Build();
 
-app.UseCors("AllowOrigin");
+
+app.UseCors("AllowAllOrigins");
+
+//app.UseCors("AllowOrigin");
 
 using (var scope = app.Services.CreateScope())
 using (var context = scope.ServiceProvider.GetService<RedcorpCenterDBContext>())

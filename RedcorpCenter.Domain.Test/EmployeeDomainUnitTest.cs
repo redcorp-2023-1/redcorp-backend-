@@ -18,8 +18,8 @@ namespace RedcorpCenter.Domain.Test
             //Arrange
             Employee employee = new Employee()
             {
-                Name = "employee",
-                last_name = "empleado"
+                Name = "Carlos",
+                last_name = "Gonzales"
             };
 
             //Mock

@@ -25,7 +25,7 @@ namespace RedcorpCenter.API.Middleware
             var email = tokenDomain.ValidateJwt(token);
 
             if (email != null)
-            {
+            {   
                 context.Items["User"] = await employeeDomain.GetByEmail(email);
             }
 
