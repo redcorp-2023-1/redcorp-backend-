@@ -7,7 +7,7 @@ using RedcorpCenter.Infraestructure;
 using RedcorpCenter.API.Filter;
 
 namespace RedcorpCenter.API.Controllers
-{
+{   
     [Route("api/[controller]")]
     [Authorize("user,admin")]
     [ApiController]
@@ -15,126 +15,91 @@ namespace RedcorpCenter.API.Controllers
     {
         private IProjectInfraestructure _projectInfraestructure;
         private IProjectDomain _projectDomain;
-
+        
         public ProjectController(IProjectInfraestructure projectInfraestructure, IProjectDomain projectdomain)
         {
             _projectInfraestructure = projectInfraestructure;
             _projectDomain = projectdomain;
         }
-
+        
         [HttpGet]
-        public IActionResult Get()
+        public List<Project> Get()
         {
-            try
-            {
-                var projects = _projectInfraestructure.GetAll();
-                return Ok(projects);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            return _projectInfraestructure.GetAll();
         }
-
+        
         [HttpGet("{projectId}")]
-        public IActionResult GetProjectById(int id)
+        //[HttpGet("{id}", Name = "Get")]
+        public ProjectResponse GetProjectById(int id)
         {
-            try
+            Project project = _projectInfraestructure.GetById(id);
+            
+            ProjectResponse projectResponse = new ProjectResponse()
             {
-                var project = _projectInfraestructure.GetById(id);
-                if (project == null)
-                    return NotFound();
-
-                var projectResponse = new ProjectResponse()
-                {
-                    Id = project.Id,
-                    Name = project.Name,
-                    Description = project.Description,
-                    StartDate = project.InitialDate,
-                    EndDate = project.FinalDate,
-                    State = project.State,
-                };
-
-                return Ok(projectResponse);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+                Id = project.Id,
+                Name = project.Name,
+                Description = project.Description,
+                StartDate = project.InitialDate,
+                EndDate = project.FinalDate,
+                State = project.State,
+            };
+            
+            return projectResponse;
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] ProjectRequest value)
         {
-            try
+            if(ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                Project project = new Project()
                 {
-                    Project project = new Project()
-                    {
-                        Name = value.Name,
-                        Description = value.Description,
-                        InitialDate = DateTime.Parse(value.InitialDate),
-                        FinalDate = DateTime.Parse(value.FinalDate),
-                        State = value.State,
-                    };
+                    Name = value.Name,
+                    Description = value.Description,
+                    InitialDate = DateTime.Parse(value.InitialDate),
+                    FinalDate = DateTime.Parse(value.FinalDate),
+                    State = value.State,
+                };
 
-                    var result = await _projectDomain.SaveAsync(project);
+                var result = await _projectDomain.SaveAsync(project);
 
-                    return result ? StatusCode(201) : StatusCode(500);
-                }
-                else
-                {
-                    return StatusCode(400);
-                }
+                return result ? StatusCode(201) : StatusCode(500);
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(400);
             }
+
+            
         }
-
+        
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ProjectRequest value)
+        public void Put(int id, [FromBody] ProjectRequest value)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                Project project = new Project()
                 {
-                    Project project = new Project()
-                    {
-                        Name = value.Name,
-                        Description = value.Description,
-                        InitialDate = DateTime.Parse(value.InitialDate),
-                        FinalDate = DateTime.Parse(value.FinalDate),
-                        State = value.State,
-                    };
-                    _projectDomain.update(id, project);
-                    return NoContent();
-                }
-                else
-                {
-                    return BadRequest();
-                }
+                    Name = value.Name,
+                    Description = value.Description,
+                    InitialDate = DateTime.Parse(value.InitialDate),
+                    FinalDate = DateTime.Parse(value.FinalDate),
+                    State = value.State,
+                };
+                _projectDomain.update(id, project);
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, ex.Message);
+                StatusCode(400);
             }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public void Delete(int id)
         {
-            try
-            {
-                _projectDomain.delete(id);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            _projectDomain.delete(id);
         }
     }
 }
+
+
