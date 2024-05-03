@@ -25,81 +25,125 @@ namespace RedcorpCenter.API.Controllers
         
                 
         [HttpGet]
-        public List<Task> Get()
+public IActionResult Get()
+{
+    try
+    {
+        return Ok(_taskInfraestructure.GetAll());
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error al obtener todas las tareas: {ex.Message}");
+        return StatusCode(500);
+    }
+}
+
+[HttpGet("{TaskId}")]
+public IActionResult GetTaskById(int id)
+{
+    try
+    {
+        Task task = _taskInfraestructure.GetById(id);
+
+        if (task == null)
+            return NotFound();
+
+        TaskResponse taskResponse = new TaskResponse()
         {
-            return _taskInfraestructure.GetAll();
-        }
-        
-                
-        [HttpGet("{TaskId}")]
-        public TaskResponse GetTaskById(int id)
+            Id = task.Id,
+            Name = task.Name,
+            Description = task.Description,
+            StartDate = task.InitialDate,
+            EndDate = task.FinalDate,
+            IsCompleted = task.IsCompleted,
+        };
+
+        return Ok(taskResponse);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error al obtener la tarea con ID {id}: {ex.Message}");
+        return StatusCode(500);
+    }
+}
+
+[HttpPost]
+public async Task<IActionResult> PostAsync([FromBody] TaskRequest value)
+{
+    try
+    {
+        if(ModelState.IsValid)
         {
-            Task task = _taskInfraestructure.GetById(id);
-            
-            TaskResponse taskResponse = new TaskResponse()
+            Task task = new Task()
             {
-                Id = task.Id,
-                Name = task.Name,
-                Description = task.Description,
-                StartDate = task.InitialDate,
-                EndDate = task.FinalDate,
-                IsCompleted = task.IsCompleted,
+                Name = value.Name,
+                Description = value.Description,
+                InitialDate = DateTime.Parse(value.StartDate),
+                FinalDate = DateTime.Parse(value.FinalDate),
+                IsCompleted = value.IsCompleted,
             };
-            
-            return taskResponse;
-        }
-        
-        [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] TaskRequest value)
-        {
-            if(ModelState.IsValid)
-            {
-                Task task = new Task()
-                {
-                    Name = value.Name,
-                    Description = value.Description,
-                    InitialDate = DateTime.Parse(value.StartDate),
-                    FinalDate = DateTime.Parse(value.FinalDate),
-                    IsCompleted = value.IsCompleted,
-                };
 
-                var result = await _taskDomain.SaveAsync(task);
+            var result = await _taskDomain.SaveAsync(task);
 
-                return result ? StatusCode(201):StatusCode(500);
+            return result ? StatusCode(201) : StatusCode(500);
+        }
+        else
+        {
+            return StatusCode(400);
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error al crear la tarea: {ex.Message}");
+        return StatusCode(500);
+    }
+}
 
-            }
-            else
-            {
-                return StatusCode(400);
-            }
-        }
-        
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] TaskRequest value)
+[HttpPut("{id}")]
+public IActionResult Put(int id, [FromBody] TaskRequest value)
+{
+    try
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
+            Task task = new Task()
             {
-                Task task = new Task()
-                {
-                    Name = value.Name,
-                    Description = value.Description,
-                    InitialDate = DateTime.Parse(value.StartDate),
-                    FinalDate = DateTime.Parse(value.FinalDate),
-                    IsCompleted = value.IsCompleted,
-                };
-                _taskDomain.update(id, task);
-            }
-            else
-            {
-                StatusCode(400);
-            }
+                Name = value.Name,
+                Description = value.Description,
+                InitialDate = DateTime.Parse(value.StartDate),
+                FinalDate = DateTime.Parse(value.FinalDate),
+                IsCompleted = value.IsCompleted,
+            };
+            _taskDomain.update(id, task);
+            return Ok();
         }
-        
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        else
         {
-            _taskDomain.delete(id);
+            return StatusCode(400);
         }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error al actualizar la tarea con ID {id}: {ex.Message}");
+        return StatusCode(500);
+    }
+}
+
+[HttpDelete("{id}")]
+public IActionResult Delete(int id)
+{
+    try
+    {
+        _taskDomain.delete(id);
+        return Ok();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error al eliminar la tarea con ID {id}: {ex.Message}");
+        return StatusCode(500);
+    }
+}
+
     }
 }
 
