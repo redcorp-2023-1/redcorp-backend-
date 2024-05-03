@@ -9,14 +9,14 @@ namespace RedcorpCenter.Infraestructure
 {
     public interface ISectionAndEmployeeInfraestructure
     {
-        SectionAndEmployee GetById(int id);
-        public bool Save(SectionAndEmployee sectionAndEmployees);
-        public bool update(int id, int Section_Id, int Employee_Id);
-        public bool delete(int id);
+        Task<SectionAndEmployee> GetByIdAsync(int id);
+        public Task<bool> SaveAsync(SectionAndEmployee sectionAndEmployees);
+        public Task<bool> UpdateAsync(int id, int Section_Id, int Employee_Id);
+        public Task<bool> DeleteAsync(int id);
 
-        public bool existsSectionIdAndEmployeeId(SectionAndEmployee sectionAndEmployee);
-        public List<Employee> GetEmployeesBySectionId(int sectionId);
-        public List<Section> GetSectionsByEmployeeId(int employeeId);
+        public Task<bool> existsSectionIdAndEmployeeId(SectionAndEmployee sectionAndEmployee);
+        public Task<List<Employee>> GetEmployeesBySectionId(int sectionId);
+        public Task<List<Section>> GetSectionsByEmployeeId(int employeeId);
         Task<List<SectionAndEmployee>> GetAllAsync();
 
     }
