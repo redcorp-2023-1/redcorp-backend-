@@ -13,14 +13,32 @@ public class TaskMySQLInfraestructure : ITaskInfraestructure
         _redcorpCenterDBContext= redcorpCenterDBContext;
     }
     
-    public List<Task> GetAll()
+public List<Task> GetAll()
     {
-        return _redcorpCenterDBContext.Tasks.Where(project => project.IsActive).ToList();
+        try
+        {
+            return _redcorpCenterDBContext.Tasks.Where(project => project.IsActive).ToList();
+        }
+        catch (Exception ex)
+        {
+            // Log the exception or handle it appropriately
+            Console.WriteLine($"Error al recuperar todas las tareas: {ex.Message}");
+            throw; // Re-throw the exception to propagate it further
+        }
     }
-    
+
     public Task GetById(int id)
     {
-        return _redcorpCenterDBContext.Tasks.Find(id);
+        try
+        {
+            return _redcorpCenterDBContext.Tasks.Find(id);
+        }
+        catch (Exception ex)
+        {
+            // Log the exception or handle it appropriately
+            Console.WriteLine($"Error al recuperar la tarea con ID {id}: {ex.Message}");
+            throw; // Re-throw the exception to propagate it further
+        }
     }
 
     public async Task<bool> SaveAsync(Task task)
@@ -32,39 +50,56 @@ public class TaskMySQLInfraestructure : ITaskInfraestructure
             await _redcorpCenterDBContext.SaveChangesAsync();
             return true;
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            throw;
-            return false;
+            // Log the exception or handle it appropriately
+            Console.WriteLine($"Error al guardar la tarea: {ex.Message}");
+            throw; // Re-throw the exception to propagate it further
         }
-        
     }
 
     public bool update(int id, Task task)
     {
-        Task _task = _redcorpCenterDBContext.Tasks.Find(id);
-        _task.Name = task.Name;
-        _task.Description = task.Description;
-        _task.FinalDate = task.FinalDate;
-        _task.IsCompleted = task.IsCompleted;
+        try
+        {
+            Task _task = _redcorpCenterDBContext.Tasks.Find(id);
+            _task.Name = task.Name;
+            _task.Description = task.Description;
+            _task.FinalDate = task.FinalDate;
+            _task.IsCompleted = task.IsCompleted;
 
-        _redcorpCenterDBContext.Tasks.Update(_task);
+            _redcorpCenterDBContext.Tasks.Update(_task);
 
-        _redcorpCenterDBContext.SaveChanges();
+            _redcorpCenterDBContext.SaveChanges();
 
-        return true;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            // Log the exception or handle it appropriately
+            Console.WriteLine($"Error al actualizar la tarea con ID {id}: {ex.Message}");
+            throw; // Re-throw the exception to propagate it further
+        }
     }
 
     public bool delete(int id)
     {
-        Task task = _redcorpCenterDBContext.Tasks.Find(id);
-        
-        task.IsActive = false;
-        
-        _redcorpCenterDBContext.Tasks.Update(task);
-        
-        _redcorpCenterDBContext.SaveChanges();
+        try
+        {
+            Task task = _redcorpCenterDBContext.Tasks.Find(id);
 
-        return true;
+            task.IsActive = false;
+
+            _redcorpCenterDBContext.Tasks.Update(task);
+
+            _redcorpCenterDBContext.SaveChanges();
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al eliminar la tarea con ID {id}: {ex.Message}");
+            throw;
+        }
     }
 }
