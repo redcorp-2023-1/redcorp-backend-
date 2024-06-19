@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RedcorpCenter.Domain.Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0bb6f1a4407080fb902403bcc1745b9b53918f3")]
 [assembly: System.Reflection.AssemblyProductAttribute("RedcorpCenter.Domain.Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RedcorpCenter.Domain.Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

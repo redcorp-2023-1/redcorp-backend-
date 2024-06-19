@@ -4,8 +4,8 @@ namespace RedcorpCenter.Domain
 {
     public interface ISectionAndEmployeeDomain
     {
-        public bool Save(SectionAndEmployee sectionAndEmployee);
-        public bool update(int id, int Section_id, int Employee_id);
-        public bool delete(int id);
+        public Task<bool> SaveAsync(SectionAndEmployee sectionAndEmployee);
+        public Task<bool> UpdateAsync(int id, int Section_id, int Employee_id);
+        public Task<bool> DeleteAsync(int id);
     }
 }

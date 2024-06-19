@@ -22,22 +22,39 @@ namespace RedcorpCenter.Infraestructure
 
         public async Task<List<SectionAndEmployee>> GetAllAsync()
         {
-            return await _redcorpCenterDBContext.SectionsAndEmployees.Where(SE => SE.IsActive).ToListAsync();
+            try
+            {
+                return await _redcorpCenterDBContext.SectionsAndEmployees.Where(SE => SE.IsActive).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al obtener los SectionAndEmployee de la base de datos.", e);
+            }
+
         }
 
-        public SectionAndEmployee GetById(int id)
-        {
-            return _redcorpCenterDBContext.SectionsAndEmployees.Find(id);
-        }
-
-        public bool Save(SectionAndEmployee sectionAndEmployees)
+        public async Task<SectionAndEmployee> GetByIdAsync(int id)
         {
             try
             {
-                if(existsSectionIdAndEmployeeId(sectionAndEmployees))
+                return await _redcorpCenterDBContext.SectionsAndEmployees.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el SectionAndEmployee con el id especificado en la base de datos.", ex);
+            }
+
+        }
+
+        public async Task<bool> SaveAsync(SectionAndEmployee sectionAndEmployees)
+        {
+            try
+            {
+                if(await existsSectionIdAndEmployeeId(sectionAndEmployees))
                 {
-                    _redcorpCenterDBContext.SectionsAndEmployees.Add(sectionAndEmployees);
-                    _redcorpCenterDBContext.SaveChanges();
+                    await _redcorpCenterDBContext.SectionsAndEmployees.AddAsync(sectionAndEmployees);
+                    await _redcorpCenterDBContext.SaveChangesAsync();
+                    return true;
                 }
                 else
                 {
@@ -47,69 +64,100 @@ namespace RedcorpCenter.Infraestructure
             }
             catch (Exception ex)
             {
-                throw;
+                throw new Exception("Error al guardar SectionAndEmployee en la base de datos.",ex);
             }
-            return true;
+
         }
 
-        public bool update(int id, int Section_Id, int Employee_Id)
+        public async Task<bool> UpdateAsync(int id, int Section_Id, int Employee_Id)
         {
-            SectionAndEmployee _sectionsAndEmployees = _redcorpCenterDBContext.SectionsAndEmployees.Find(id);
-            _sectionsAndEmployees.Section_Id = Section_Id;
-            _sectionsAndEmployees.Employees_Id = Employee_Id;
+            try
+            {
+                SectionAndEmployee _sectionsAndEmployees = await _redcorpCenterDBContext.SectionsAndEmployees.FindAsync(id);
+                _sectionsAndEmployees.Section_Id = Section_Id;
+                _sectionsAndEmployees.Employees_Id = Employee_Id;
 
-            _redcorpCenterDBContext.SectionsAndEmployees.Update(_sectionsAndEmployees);
-            _redcorpCenterDBContext.SaveChanges();
+                _redcorpCenterDBContext.SectionsAndEmployees.Update(_sectionsAndEmployees);
+                await _redcorpCenterDBContext.SaveChangesAsync();
 
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al actualizar SectionAndEmployee en la base de datos.",e);
+            }
+ 
         }
-        public bool delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            SectionAndEmployee sectionsAndEmployees = _redcorpCenterDBContext.SectionsAndEmployees.Find(id);
-            sectionsAndEmployees.IsActive = false;
-            _redcorpCenterDBContext.SectionsAndEmployees.Update(sectionsAndEmployees);
-            _redcorpCenterDBContext.SaveChanges();
-            return true;
+            try
+            {
+                SectionAndEmployee sectionsAndEmployees = await _redcorpCenterDBContext.SectionsAndEmployees.FindAsync(id);
+                sectionsAndEmployees.IsActive = false;
+                _redcorpCenterDBContext.SectionsAndEmployees.Update(sectionsAndEmployees);
+                await _redcorpCenterDBContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al eliminar SectionAndEmployee en la base de datos.", e);
+            }
         }
 
-        public bool existsSectionIdAndEmployeeId(SectionAndEmployee sectionAndEmployee)
+        public async Task<bool> existsSectionIdAndEmployeeId(SectionAndEmployee sectionAndEmployee)
         {
-            bool employeeExists = _redcorpCenterDBContext.Employees.Any(e => e.Id == sectionAndEmployee.Employees_Id);
-            bool sectionExists = _redcorpCenterDBContext.Sections.Any(s => s.Id == sectionAndEmployee.Section_Id);
+            bool employeeExists = await _redcorpCenterDBContext.Employees.AnyAsync(e => e.Id == sectionAndEmployee.Employees_Id);
+            bool sectionExists = await _redcorpCenterDBContext.Sections.AnyAsync(s => s.Id == sectionAndEmployee.Section_Id);
 
             return employeeExists && sectionExists;
         }
-        public List<Employee> GetEmployeesBySectionId(int sectionId)
+        public async Task<List<Employee>> GetEmployeesBySectionId(int sectionId)
         {
-            List<int> employeeIds = _redcorpCenterDBContext.SectionsAndEmployees
-                .Where(se => se.Section_Id == sectionId)
-                .Select(se => se.Employees_Id)
-                .ToList();
-
-            List<Employee> employees = _redcorpCenterDBContext.Employees
-                .Where(e => employeeIds.Contains(e.Id))
-                .ToList();
-
-            return employees;
-        }
-        public List<Models.Section> GetSectionsByEmployeeId(int employeeId)
-        {
-            List<Models.Section> sections = new List<Models.Section>();
-
-            List<SectionAndEmployee> sectionAndEmployees = _redcorpCenterDBContext.SectionsAndEmployees
-                .Where(se => se.Employees_Id == employeeId)
-                .ToList();
-
-            foreach (SectionAndEmployee sectionAndEmployee in sectionAndEmployees)
+            try
             {
-                Models.Section section = _redcorpCenterDBContext.Sections.FirstOrDefault(s => s.Id == sectionAndEmployee.Section_Id);
-                if (section != null)
-                {
-                    sections.Add(section);
-                }
+                List<int> employeeIds = await _redcorpCenterDBContext.SectionsAndEmployees
+                    .Where(se => se.Section_Id == sectionId)
+                    .Select(se => se.Employees_Id)
+                    .ToListAsync();
+
+                List<Employee> employees = await _redcorpCenterDBContext.Employees
+                    .Where(e => employeeIds.Contains(e.Id))
+                    .ToListAsync();
+
+                return employees;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al obtener empleados con el id especificado en la base de datos.", e);
             }
 
-            return sections;
+        }
+        public async Task<List<Models.Section>> GetSectionsByEmployeeId(int employeeId)
+        {
+            try
+            {
+                List<Models.Section> sections = new List<Models.Section>();
+
+                List<SectionAndEmployee> sectionAndEmployees = await _redcorpCenterDBContext.SectionsAndEmployees
+                    .Where(se => se.Employees_Id == employeeId)
+                    .ToListAsync();
+
+                foreach (SectionAndEmployee sectionAndEmployee in sectionAndEmployees)
+                {
+                    Models.Section section = await _redcorpCenterDBContext.Sections.FirstOrDefaultAsync(s => s.Id == sectionAndEmployee.Section_Id);
+                    if (section != null)
+                    {
+                        sections.Add(section);
+                    }
+                }
+
+                return sections;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al buscar Section con el id especificado en la base de datos", e);
+            }
+
         }
     }
 }

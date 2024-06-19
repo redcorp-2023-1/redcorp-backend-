@@ -28,65 +28,121 @@ namespace RedcorpCenter.API.Controllers
         [HttpGet]
         public async Task<List<SectionAndEmployee>> GetAsync()
         {
-            return await _sectionAndEmployeeInfraestructure.GetAllAsync();
+            try
+            {
+                return await _sectionAndEmployeeInfraestructure.GetAllAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
         // GET api/<SectionAndEmployeeController>/5
         [HttpGet("{id}", Name = "SectionsEmployees")]
-        public SectionAndEmployee Get(int id)
+        public async Task<SectionAndEmployee> GetByIdAsync(int id)
         {
-            SectionAndEmployee sectionsAndEmployees = _sectionAndEmployeeInfraestructure.GetById(id);
-
-            return sectionsAndEmployees;
+            try
+            {
+                SectionAndEmployee sectionsAndEmployees = await _sectionAndEmployeeInfraestructure.GetByIdAsync(id);
+                return sectionsAndEmployees;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
+        
         [HttpGet("GetEmployees/{sectionid}", Name = "GetEmployees")]
-        public List<Employee> GetEmployeesBySectionId(int sectionid)
+        public async Task<List<Employee>> GetEmployeesBySectionIdByAsync(int sectionid)
         {
-            return _sectionAndEmployeeInfraestructure.GetEmployeesBySectionId(sectionid);
+            try
+            {
+                return await _sectionAndEmployeeInfraestructure.GetEmployeesBySectionId(sectionid);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
+        
         [HttpGet("GetSections/{employeeid}", Name = "GetSections")]
-        public List<Section> GetSectionsByEmployeeId(int employeeid)
+        public async Task<List<Section>> GetSectionsByEmployeeId(int employeeid)
         {
-            return _sectionAndEmployeeInfraestructure.GetSectionsByEmployeeId(employeeid);
+            try
+            {
+                return await _sectionAndEmployeeInfraestructure.GetSectionsByEmployeeId(employeeid);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
 
         // POST api/<SectionAndEmployeeController>
         [HttpPost]
-        public void Post([FromBody] SectionAndEmployeeRequest sectionsAndEmployeesRequest)
+        public async Task<IActionResult> PostAsync([FromBody] SectionAndEmployeeRequest sectionsAndEmployeesRequest)
         {
-            if (ModelState.IsValid)
+            try
             {
-                SectionAndEmployee sectionAndEmployee = new SectionAndEmployee()
+                if (ModelState.IsValid)
                 {
-                    Section_Id=sectionsAndEmployeesRequest.Section_Id,
-                    Employees_Id=sectionsAndEmployeesRequest.Employees_Id
-                };
-
-                _sectionAndEmployeeDomain.Save(sectionAndEmployee); 
-
+                    SectionAndEmployee sectionAndEmployee = new SectionAndEmployee()
+                    {
+                        Section_Id=sectionsAndEmployeesRequest.Section_Id,
+                        Employees_Id=sectionsAndEmployeesRequest.Employees_Id
+                    };
+                    await _sectionAndEmployeeDomain.SaveAsync(sectionAndEmployee);
+                    return Ok();
+                }
+                else
+                {
+                    return StatusCode(400);
+                }
             }
-            else
+            catch (Exception e)
             {
-                StatusCode(400);
+                return StatusCode(500);
             }
         }
 
         // PUT api/<SectionAndEmployeeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] SectionAndEmployeeRequest sectionAndEmployeeRequest)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SectionAndEmployeeRequest sectionAndEmployeeRequest)
         {
-
-            _sectionAndEmployeeDomain.update(id,sectionAndEmployeeRequest.Section_Id, sectionAndEmployeeRequest.Employees_Id);
+            try
+            {
+                await _sectionAndEmployeeDomain.UpdateAsync(id,sectionAndEmployeeRequest.Section_Id, sectionAndEmployeeRequest.Employees_Id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
         }
 
         // DELETE api/<SectionAndEmployeeController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            _sectionAndEmployeeDomain.delete(id);
+            try
+            {
+                await _sectionAndEmployeeDomain.DeleteAsync(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+
         }
 
 

@@ -36,74 +36,109 @@ namespace RedcorpCenter.API.Controllers
             _configuration = configuration;
 
         }
-
-
+        
+        
         [Authorize("user,admin")]   
         // GET: api/Tutorial
         [HttpGet]
         public async Task<List<EmployeeResponse>> GetAsync()
         {
+            try
+            {
+                var employees = await _employeeInfraestructure.GetAllAsync();
 
-            var employees = await _employeeInfraestructure.GetAllAsync();
+                return _mapper.Map<List<Employee>, List<EmployeeResponse>>(employees);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
-            return _mapper.Map<List<Employee>, List<EmployeeResponse>>(employees);
         }
+        
+        
         [Authorize("user,admin")]
         // GET: api/Tutorial/5
         [HttpGet("{id}", Name = "Get")]
-        public EmployeeResponse Get(int id)
+        public async Task<EmployeeResponse> GetByIdAsync(int id)
         {
-            Employee employee = _employeeInfraestructure.GetById(id);
-
-            
-
-            var employeeResponse = _mapper.Map<Employee, EmployeeResponse>(employee);
-
-            return employeeResponse;
-
+            try
+            {
+                Employee employee = await _employeeInfraestructure.GetByIdAsync(id);
+                var employeeResponse = _mapper.Map<Employee, EmployeeResponse>(employee);
+                return employeeResponse;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
+        
+        
         [Authorize("user,admin")]
         // POST: api/Tutorial
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] EmployeeRequest employeeRequest)
         {
-            if (ModelState.IsValid)
+            try
             {
-                
-
-                var employee = _mapper.Map<EmployeeRequest, Employee>(employeeRequest);
-
-                var result = await _employeeDomain.SaveAsync(employee);
-
-                return result ? StatusCode(201) : StatusCode(500);
+                if (ModelState.IsValid)
+                {
+                    var employee = _mapper.Map<EmployeeRequest, Employee>(employeeRequest);
+                    var result = await _employeeDomain.SaveAsync(employee);
+                    return result ? StatusCode(201) : StatusCode(500);
+                }
+                else
+                {
+                    return StatusCode(400);
+                }
             }
-            else
+            catch (Exception e)
             {
-                return StatusCode(400);
+                return StatusCode(500);
             }
+
         }
+        
         [Authorize("user,admin")]
         // PUT: api/Tutorial/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] EmployeeRequest employeeRequest)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] EmployeeRequestPut employeeRequest)
         {
-            if(ModelState.IsValid)
+            try
             {
-                _employeeDomain.update(id, employeeRequest.Name, employeeRequest.last_name, employeeRequest.email, employeeRequest.area, employeeRequest.cargo);
-
+                if(ModelState.IsValid)
+                {
+                    await _employeeDomain.UpdateAsync(id, _mapper.Map<EmployeeRequestPut, Employee>(employeeRequest));
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
-            else
+            catch (Exception e)
             {
-                StatusCode(400);
+                return StatusCode(500);
             }
-
         }
+        
         [Authorize("user,admin")]
         // DELETE: api/Tutorial/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            _employeeDomain.delete(id);
+            try
+            {
+                await _employeeDomain.DeleteAsync(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
         }
 
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
@@ -126,24 +161,32 @@ namespace RedcorpCenter.API.Controllers
             }
             catch (Exception ex)
             {
-                
                 return StatusCode(StatusCodes.Status400BadRequest, "Error al procesar");
             }
         }
+        
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost]
         [Route("Signup")]
-        public async Task<IActionResult> Signup([FromBody] EmployeeRequest employeesignup)
+        public async Task<dynamic> Signup([FromBody] EmployeeRequest employeesignup)
         {
-            var employee = _mapper.Map<EmployeeRequest,Employee>(employeesignup);
+            var employee = _mapper.Map<EmployeeRequest, Employee>(employeesignup);
             var id = await _employeeDomain.Signup(employee);
 
             if (id > 0)
-                return Ok(id.ToString());
+            {
+                var employeeSignup = _mapper.Map<EmployeeRequest, Employee>(employeesignup);
+                var jwt = await _employeeDomain.Login(employeeSignup);
+                var user_founded = await _employeeDomain.GetByEmail(employeeSignup.email);
+
+                return new
+                {
+                    token = Ok(jwt),
+                    user_id = user_founded.Id
+                };
+            }
             else
                 return BadRequest();
         }
-
-
     }
 }

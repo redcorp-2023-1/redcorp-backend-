@@ -18,8 +18,8 @@ namespace RedcorpCenter.Domain.Test
             //Arrange
             Employee employee = new Employee()
             {
-                Name = "employee",
-                last_name = "empleado"
+                Name = "Carlos",
+                last_name = "Gonzales"
             };
 
             //Mock
@@ -50,15 +50,15 @@ namespace RedcorpCenter.Domain.Test
             };
 
             var _employeeInfraestructure = new Mock<IEmployeeInfraestructure>();
-            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
             var _encryptDomain = new Mock<IEncryptDomain>();
             var _tokenDomain = new Mock<ITokenDomain>();
+            _employeeInfraestructure.Setup(t => t.SaveAsync(employee)).ReturnsAsync(true);
             EmployeeDomain employeeDomain = new EmployeeDomain(_employeeInfraestructure.Object,
                 _encryptDomain.Object, _tokenDomain.Object);
 
             var ex = Assert.ThrowsAsync<Exception>(() => employeeDomain.SaveAsync(employee));
 
-            Assert.Equal("The length of your name and lastname is invalid(>3)", ex.Result.Message);
+            Assert.Equal("La longitud del nombre o apellido es menor a 3 caracteres", ex.Result.Message);
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace RedcorpCenter.Domain.Test
             var ex = Assert.ThrowsAsync<Exception>(() => employeeDomain.SaveAsync(employee));
 
             //Assert
-            Assert.Equal("the name is more than 20", ex.Result.Message);
+            Assert.Equal("La longitud del nombre es mayor a 20 caracteres", ex.Result.Message);
         }
 
         [Fact]
