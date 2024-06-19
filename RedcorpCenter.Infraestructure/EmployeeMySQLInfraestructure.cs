@@ -159,7 +159,16 @@ namespace RedcorpCenter.Infraestructure
         {
             try
             {
+                // Verificar si ya existe un usuario con el mismo correo
+                var existingEmployee = await _redcorpCenterDBContext.Employees
+                    .FirstOrDefaultAsync(e => e.email == employee.email);
 
+                if (existingEmployee != null)
+                {
+                    throw new Exception("Ya existe un usuario registrado con este correo.");
+                }
+
+                // Asignar roles según el cargo del empleado
                 if (employee.cargo == "Supervisor")
                 {
                     employee.Roles = "admin";
@@ -169,6 +178,7 @@ namespace RedcorpCenter.Infraestructure
                     employee.Roles = "user";
                 }
 
+                // Agregar el nuevo empleado a la base de datos
                 _redcorpCenterDBContext.Employees.Add(employee);
                 await _redcorpCenterDBContext.SaveChangesAsync();
                 return employee.Id;
@@ -179,7 +189,8 @@ namespace RedcorpCenter.Infraestructure
             }
         }
 
-        
+
+
 
         public async Task<Employee> GetByEmailAsync(string email)
         {
