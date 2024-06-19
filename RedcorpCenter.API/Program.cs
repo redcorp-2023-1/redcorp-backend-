@@ -75,7 +75,7 @@ public class Program
         
         builder.Services.AddCors(options =>
         {
-            options.AddPolicy("AllowOrigin", builder =>
+            options.AddPolicy("AllowAllOrigins", builder =>
                 builder.WithOrigins("https://redcorp-web-app.web.app")
                     .AllowAnyHeader()
                     .AllowAnyMethod());
