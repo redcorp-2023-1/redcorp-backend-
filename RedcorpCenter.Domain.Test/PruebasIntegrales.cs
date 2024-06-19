@@ -80,7 +80,7 @@ namespace RedcorpCenter.Domain.Test
             var client = _factory.CreateClient();
             var jsonContent = new StringContent(
                 @"{
-                    ""email"": ""example@gmail.com"",
+                    ""email"": ""fabrizziocastro2612@gmail.com"",
                     ""password"": ""1234"",
                     ""roles"": ""admin""
                 }",
@@ -114,7 +114,7 @@ namespace RedcorpCenter.Domain.Test
             // Iniciar sesión para obtener el token de autenticación
             var loginJsonContent = new StringContent(
                 @"{
-                    ""email"": ""Example@gmail.com"",
+                    ""email"": ""fabrizziocastro2612@gmail.com"",
                     ""password"": ""1234"",
                     ""roles"": ""Supervisor""
                 }",
@@ -136,7 +136,7 @@ namespace RedcorpCenter.Domain.Test
                     ""name"": ""Fabrizzio Antonio"",
                     ""last_name"": ""Castro"",
                     ""dni"": ""76330660"",
-                    ""email"": ""Example@gmail.com"",
+                    ""email"": ""fabrizziocastro2612@gmail.com"",
                     ""area"": ""Sistemas"",
                     ""cargo"": ""Supervisor"",
                     ""photo"": ""https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTvhbfHoy6ZX-T8GsUNmVjX5rm6WGE6yKBmL8tApbevaYFdjhJ66SFYLv2ih1Gat3m3rxdi""

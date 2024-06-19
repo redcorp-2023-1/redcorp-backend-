@@ -24,5 +24,7 @@ namespace RedcorpCenter.API.Request
         [Required]
         public string? cargo { get; set; }
 
+        public string? photo { get; set; }
+
     }
 }

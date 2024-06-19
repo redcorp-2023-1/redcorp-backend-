@@ -63,8 +63,8 @@ public class Program
                 dbContextOptions.UseMySql(connectionString,
                     ServerVersion.AutoDetect(connectionString),
                     options => options.EnableRetryOnFailure(
-                        maxRetryCount: 5,
-                        maxRetryDelay: System.TimeSpan.FromSeconds(30),
+                        maxRetryCount: 10,
+                        maxRetryDelay: System.TimeSpan.FromSeconds(60),
                         errorNumbersToAdd: null)
                 );
             });
