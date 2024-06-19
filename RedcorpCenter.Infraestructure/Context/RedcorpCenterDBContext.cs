@@ -28,7 +28,7 @@ namespace RedcorpCenter.Infraestructure.Context
             if (!optionsBuilder.IsConfigured)
             {
                 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-                optionsBuilder.UseMySql("Server=viaduct.proxy.rlwy.net,39301;Uid=root;Pwd=ZcJFbOPzxAZGADRYYpRZpHKaLxppQAME;Database=railway;", serverVersion);
+                optionsBuilder.UseMySql("Server=roundhouse.proxy.rlwy.net,53994;Uid=root;Pwd=tWUxPxUJAxMfzWwZVwIGtKynbAQqoibX;Database=railway;", serverVersion);
                 
             }
         }
