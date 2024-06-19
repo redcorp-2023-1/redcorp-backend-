@@ -72,23 +72,23 @@ public class Program
         builder.Services.AddAutoMapper(typeof(ModelToResponse), typeof(RequestToModel));
 
         //Cors
-        /*
+        
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowOrigin", builder =>
-                builder.WithOrigins("http://localhost:5173")
+                builder.WithOrigins("https://redcorp-web-app.web.app")
                     .AllowAnyHeader()
                     .AllowAnyMethod());
-        });*/
+        });
 
-        //Cors
-        builder.Services.AddCors(options =>
+        //Cors/*
+        /*builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAllOrigins", builder =>
                 builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod());
-        });
+        });*/
 
         var app = builder.Build();
 
